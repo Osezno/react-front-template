@@ -1,3 +1,13 @@
+html{
+  font-size: 10px;
+}
+/* for rem units in material */
+html, body {
+  height:100%;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
