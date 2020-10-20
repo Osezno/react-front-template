@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -36,9 +36,6 @@ const ResetPassword = (props) => {
                     <Info title={"lorem Ipsum"} highlight={"dolor amet"} message={pageInfo.welcomeMessage} /> 
                     <ResetPasswordForm />
                     <div className={classes.linkContainer}>
-                        <Text color={colors.dark} type="small">
-                            ¿Ya tienes cuenta?&nbsp;
-                        </Text>
                         <Link
                             variant="subtitle2"
                             color="primary"
@@ -47,7 +44,7 @@ const ResetPassword = (props) => {
                         >
 
                             <Text color={colors.primary} type="small">
-                                Iniciar sesion
+                               Regresar a inicio de sesión
                             </Text>
                         </Link>
                     </div>

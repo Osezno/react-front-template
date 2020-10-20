@@ -51,7 +51,6 @@ const ContentStyle = makeStyles(theme => ({
         height: '200px',
         margin: '0  auto',
         marginTop: theme.spacing(1),
-        margin: '0  auto',
         display: 'block',
         boxShadow: shadows.leftShadow,
         borderRadius: borders.polygon,

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import * as ROUTES from '../../constants/routes';
+import React, { useState } from 'react';
+import * as ROUTES from '../constants/routes';
+import { connect } from 'react-redux';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -7,13 +9,14 @@ import {
     Switch
 } from 'react-router-dom';
 //content
-import LayoutStyle from './Layout.style'
-import Header from './Header'
-import Footer from './Footer'
-import Main from '../../containers/Dashboard/Main'
+import LayoutStyle from '../components/Layout/Layout.style'
+import Header from '../components/Layout/Header'
+import Footer from '../components/Layout/Footer'
+import Dashboard from './Dashboard/Dashboard'
+import * as ACTIONS from '../store/actions';
 //account
-import SignIn from '../../containers/Account/SignIn';
-import ResetPassword from '../../containers/Account/ResetPassword';
+import SignIn from './Account/SignIn';
+import ResetPassword from './Account/ResetPassword';
 //import ChangePassword from 'containers/Account/ChangePassword';
 //import NoAccess from 'containers/Content/NoAccess';
 //import Pagination from '../../containers/Controls/Pagination'
@@ -21,27 +24,18 @@ import ResetPassword from '../../containers/Account/ResetPassword';
 
 const useStyles = LayoutStyle
 
-const Layout = props => {
-    const { authUser } = props
+const Main = props => {
+    const { authUser, signOut } = props
+    const {uuid, token} = authUser
     const classes = useStyles();
-    const [search, setSearch] = useState(false);
-    const [loading, setloadig] = useState(false);
-
-
-    const handleLoading = () => {
-        setloadig(true)
-        setTimeout(() => {
-            setloadig(false)
-        }, 3000);
-    }
-
+   
 
     return (
         <div className={classes.root}>
-            <Header authUser={authUser}  />
+            <Header signOut={() => signOut()} authUser={authUser}  />
             {
-                (authUser.token && authUser.uuid) ?
-                    <Main loading={loading} searchUrl={search} handleLoading={handleLoading} />
+                (token && uuid) ?
+                    <Dashboard />
                     :
                     <Router>
                         <>
@@ -59,4 +53,16 @@ const Layout = props => {
     );
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+      
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+      signOut: () => dispatch(ACTIONS.signOut())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

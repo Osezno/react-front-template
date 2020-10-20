@@ -1,69 +1,82 @@
 import { makeStyles } from '@material-ui/styles';
-import colors from '../../constants/colors';
 import shadows from '../../constants/shadows';
 import borders from '../../constants/borders';
-import grids from '../../constants/grids';
-import breakpoints from '../../constants/breakpoints';
-
-
 
 const centeredBox = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
 }
+
+const box= {
+    width: '100%',
+    padding: '7px',
+    borderRadius: '4px'
+}
 const logo = {
     height: '26px',
     zIndex: 1,
-    margin:2
+    margin: 2
 }
 const LayoutStyle = makeStyles(theme => ({
     root: {
         position: 'relative',
         display: 'block',
         textAlign: 'center',
-        background: '#000',
         width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         marginTop: 0,
         marginBottom: 0,
-        background: colors.primary,
+        background: theme.color.primary,
         height: '100%',
-        [breakpoints.largeTablet]: {
+        [theme.breakpoints.largeTablet]: {
             overflowX: 'auto',
         }
     },
     header: {
         width: '100%',
-        color: colors.white,
-        backgroundColor: colors.white,
+        color: theme.color.white,
+        backgroundColor: theme.color.white,
         display: 'flex',
         alignItems: 'center',
         height: '30px',
         justifyContent: 'justify-content: left;',
-        borderBottom: `${colors.contrastDark} 1px solid`,
-
-
+        borderBottom: `${theme.color.contrastDark} 1px solid`,
     },
     footer: {
-        ...grids.octaGrid,
-        backgroundColor: colors.primary,
-        color: colors.contrastLight,
+        ...theme.grids.octaGrid,
+        backgroundColor: theme.color.primary,
+        color: theme.color.contrastLight,
         position: 'absolute',
         bottom: '30px',
         height: '26px',
         zIndex: 1,
-        [breakpoints.largeTablet]: {
+        [theme.breakpoints.largeTablet]: {
             position: 'static',
         }
     },
-    logoContainer:{
-        height:30,
+    logoContainer: {
+        height: 30,
         marginLeft: 30
+    },
+    logout: {
+        color: theme.color.dark,
+        float: "left",
+        position: "absolute",
+        right: "30px"
+
     },
     logo: {
         ...logo
+    },
+    success: {
+        backgroundColor: theme.color.success,
+        ...box
+    },
+    error: {
+        backgroundColor: theme.color.error,
+        ...box
     },
     whitelogo: {
         ...logo,
@@ -73,10 +86,10 @@ const LayoutStyle = makeStyles(theme => ({
         ...logo
     },
     container: {
-        ...grids.twoColumnGrid
+        ...theme.grids.twoColumnGrid
     },
     searchContent: {
-        ...grids.thirdsGrid,
+        ...theme.grids.thirdsGrid,
     },
     pokemonQuery: {
         height: '50%',
@@ -84,7 +97,7 @@ const LayoutStyle = makeStyles(theme => ({
         borderBottom: "#fff solid",
     },
     pokemonGrid: {
-        ...grids.fourColumnGrid
+        ...theme.grids.fourColumnGrid
     },
     iconContainer: {
         display: 'flex',
@@ -95,7 +108,7 @@ const LayoutStyle = makeStyles(theme => ({
         height: '75%',
         margin: '0  auto',
         borderRadius: borders.softSquare,
-        backgroundColor: colors.contrastDark,
+        backgroundColor: theme.color.contrastDark,
         ...centeredBox,
     },
     ScreenContainer: {
@@ -103,11 +116,10 @@ const LayoutStyle = makeStyles(theme => ({
         height: '200px',
         margin: '0  auto',
         marginTop: theme.spacing(1),
-        margin: '0  auto',
         ...centeredBox,
         boxShadow: shadows.leftShadow,
         borderRadius: borders.polygon,
-        backgroundColor: colors.light,
+        backgroundColor: theme.color.light,
     }
 }))
 

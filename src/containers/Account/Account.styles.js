@@ -1,8 +1,13 @@
 import {
     makeStyles
 } from '@material-ui/core';
+import animations from '../../constants/animations';
 
 export const useStyles = makeStyles(theme => ({
+    ...animations,
+    fade:{
+        animation:`$fadeDown ease-in  3s `
+    },
     contentWrapper:{
         
     },

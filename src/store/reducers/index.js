@@ -25,9 +25,7 @@ export default combineReducers({
 const rootReducer = (state, action) => {
 
   if (action.type === CLEARSTORE ) {
-    const { clientState } = state;
-    state = { clientState};
-    // state = undefined;
+    state = { sessionState:{authUser: {id_estatus: null, onboard: null, id_rol: null, token: null, uuid: null}}};
   }
 
   return appReducer(state, action);

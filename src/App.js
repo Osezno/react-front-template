@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import { useStyles } from './App.styles';
+
 import { connect } from 'react-redux';
 
 
@@ -9,22 +8,22 @@ import Preloader from './components/Utils/Preloader';
 
 
 import * as ACTIONS from './store/actions';
-import Layout from './components/Layout/Layout';
+//import Layout from './components/Layout/Layout';
+import Main from './containers/Main';
 // import SignUp from 'containers/Account/SignUp';
 // 
 
 
 const App = (props) => {
-  const classes = useStyles();
   const { authUser } = props;
-
+  
   useEffect(() => {
     props.fetchAuthUser();
   }, [])
 
   return (
     <>
-      {authUser ? <Layout authUser={authUser} /> : <Preloader />}
+      {authUser ? <Main authUser={authUser} /> : <Preloader />}
     </>
 
     // <div className={classes.app}>

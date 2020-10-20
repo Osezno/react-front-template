@@ -3,7 +3,6 @@
 export {
     fetchAuthUser,
     setAuthUser,
-    setInitSession,
     signIn,
     signUp,
     signOut

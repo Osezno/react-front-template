@@ -4,11 +4,13 @@ import List from './List'
 import Profile from './Profile'
 import CircleIcon from '../../components/Icons/CircleIcon'
 import colors from '../../constants/colors';
+import { DASHBOARD } from '../../constants/routes'
 
 
 const useStyles = ContentStyle
 
-const Main = props => {
+const Dashboard = props => {
+    
     const classes = useStyles();
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon");
     const [urls, setUrls] = useState(false);
@@ -80,4 +82,4 @@ const Main = props => {
     );
 }
 
-export default Main;
+export default Dashboard;

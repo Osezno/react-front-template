@@ -59,7 +59,7 @@ const CircleIcon = (props) => {
     const classes = useStyles()
 
     let svg
-    let icon
+
     switch (type) {
         case 'back':
             svg = <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.401" viewBox="0 0 12 8.401">
@@ -77,6 +77,13 @@ const CircleIcon = (props) => {
             svg = <svg height="50" width="50">
                 <circle cx="7" cy="7" r="4" fill="transparent" />
 
+            </svg>
+            break
+        default:
+            svg = <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.401" viewBox="0 0 12 8.401">
+                <g transform="translate(0 -0.599)">
+                    <path d="M12,4.2a.6.6,0,0,1-.6.6H1.884L4.062,7.417a.6.6,0,0,1-.924.768l-3-3.6a.714.714,0,0,1-.054-.09.1.1,0,0,0-.042-.078.576.576,0,0,1,0-.432.076.076,0,0,1,.042-.078.714.714,0,0,1,.054-.09l3-3.6a.6.6,0,1,1,.924.768L1.884,3.6H11.4A.6.6,0,0,1,12,4.2Z" transform="translate(0 0.599)" fill="#ccc" />
+                </g>
             </svg>
             break
     }

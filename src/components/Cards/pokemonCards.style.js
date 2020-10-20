@@ -13,7 +13,7 @@ const centeredBox = {
     justifyContent: 'center',
 }
 
-console.log("animation",animations)
+
 const LayoutStyle = makeStyles(theme => ({
     container: {
         height: '80px',

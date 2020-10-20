@@ -2,7 +2,7 @@ import { SET_AUTH_USER, SET_SESSION_ERROR, SET_INIT_SESSION } from './types';
 import { CLEARSTORE } from './types';
 // import Firebase from 'config/Firebase';
 
-import * as ACTIONS from '../../store/actions';
+//import * as ACTIONS from '../../store/actions';
 
 
 
@@ -13,12 +13,7 @@ export const setAuthUser = user => {
     }
 }
 
-export const setInitSession = session => {
-    return {
-        type: SET_INIT_SESSION,
-        payload: session
-    }
-}
+
 
 export const clearStore = () => {
     return {
@@ -28,39 +23,37 @@ export const clearStore = () => {
 
 
 export const fetchAuthUser = () => async dispatch => {
-    dispatch(setAuthUser({token:null,uuid:null}));
-    // Firebase.auth.onAuthStateChanged(user => {
-    //     dispatch(setAuthUser(user));
-    //     if (user) dispatch(ACTIONS.fetchUser(user.uid));
-    // });
-}
-
-
-export const setSessionError = error => {
-    return {
-        type: SET_SESSION_ERROR,
-        payload: error
+    try {
+        if (localStorage.length) {
+            let session = {}
+            session['id_estatus'] = localStorage.getItem('id_estatus');
+            session['onboard'] = localStorage.getItem('onboard');
+            session['id_rol'] = localStorage.getItem('id_rol');
+            session['token'] = localStorage.getItem('token');
+            session['uuid'] = localStorage.getItem('uuid');
+            dispatch(setAuthUser(session));
+        }
+    } catch {
+        console.log("error")
+        // ignore write errors
     }
+
 }
 
-export const signIn = (email, password) => async dispatch => {
-    // Firebase.auth.signInWithEmailAndPassword(email, password)
-    //     .catch(error => {
-    //         switch (error.code) {
-    //             case 'auth/wrong-password':
-    //                 error.mensaje = 'La contraseña es incorrecta.'
-    //                 break;
-    //             case 'auth/invalid-email':
-    //                 error.mensaje = 'El correo es inválido.'
-    //                 break;
-    //             case 'auth/user-not-found':
-    //                 error.mensaje = 'El correo no se encuentra registrado aún.'
-    //                 break;
-    //             default:
-    //                 error.mensaje = 'Hubo un error al iniciar sesión.'
-    //         }
-    //         dispatch(setSessionError(error))
-    //     });;
+
+export const signIn = (session) => async dispatch => {
+    try {
+
+        localStorage.setItem('id_estatus', session.id_estatus);
+        localStorage.setItem('onboard', session.onboard);
+        localStorage.setItem('id_rol', session.id_rol);
+        localStorage.setItem('token', session.token);
+        localStorage.setItem('uuid', session.uuid);
+    } catch {
+        console.log("error")
+        // ignore write errors
+    }
+    dispatch(setAuthUser(session));
 }
 
 export const signUp = (email, password, user) => async (dispatch, getState) => {
@@ -90,5 +83,7 @@ export const signUp = (email, password, user) => async (dispatch, getState) => {
 
 export const signOut = () => async dispatch => {
     // Firebase.auth.signOut();
+    localStorage.clear();
     dispatch(clearStore());
+    //dispatch(setAuthUser({ token: null, uuid: null }));
 }
