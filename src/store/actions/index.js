@@ -4,7 +4,7 @@ export {
     fetchAuthUser,
     setAuthUser,
     signIn,
-    signUp,
+    //signUp,
     signOut
 } from './session';
 

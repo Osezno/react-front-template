@@ -17,7 +17,7 @@ import * as ACTIONS from '../store/actions';
 //account
 import SignIn from './Account/SignIn';
 import ResetPassword from './Account/ResetPassword';
-//import ChangePassword from 'containers/Account/ChangePassword';
+import ChangePassword from './Account/ChangePassword';
 //import NoAccess from 'containers/Content/NoAccess';
 //import Pagination from '../../containers/Controls/Pagination'
 
@@ -27,22 +27,31 @@ const useStyles = LayoutStyle
 const Main = props => {
     const { authUser, signOut } = props
     const {uuid, token} = authUser
+    const [toggle, setToggle] = useState(true);
+    const [view, setView] = useState(true);
     const classes = useStyles();
-   
+    // views para diferentes roles
+    const handleToggle =()=>{
+        setToggle(!toggle)
+    }
+    const changeView =(view)=>{
+        console.log(view)
+        setView(view)
+    }
 
     return (
         <div className={classes.root}>
-            <Header signOut={() => signOut()} authUser={authUser}  />
+            <Header toggle={toggle} changeView={()=> changeView} handleToggle={() => handleToggle()} signOut={() => signOut()} authUser={authUser}  />
             {
                 (token && uuid) ?
-                    <Dashboard />
+                    <Dashboard toggle={toggle} view={view} />
                     :
                     <Router>
                         <>
                             <Switch>
                                 <Route exact path={ROUTES.SIGN_IN} render={(props) => <SignIn />} />
                                 <Route exact path={ROUTES.PASSWORD_FORGET} render={(props) => <ResetPassword />} />
-                                {/* //<Route exact path={ROUTES.CHANGE_PASSWORD} render={(props) => <ChangePassword />} /> */}
+                                <Route exact path={ROUTES.CHANGE_PASSWORD} render={(props) => <ChangePassword />} /> 
                                 <Redirect to={ROUTES.SIGN_IN} />
                             </Switch>
                         </>

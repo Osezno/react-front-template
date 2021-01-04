@@ -6,30 +6,38 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import catalogs from '../../constants/catalogs';
 import api from '../../constants/api';
 import axios from 'axios';
-let vertical = 'bottom';
-let horizontal = 'center';
+import Notifications from '@material-ui/icons/Notifications';
 
+const { errors, vertical, horizontal } = catalogs
 const useStyles = LayoutStyle
 
 const Header = props => {
-    const { authUser, signOut } = props
-    const {uuid, token} = authUser
+    const classes = useStyles();
+    const { authUser, signOut, handleToggle, toggle, changeView } = props
+    const { uuid, token } = authUser
     const [anchorEl, setAnchorEl] = React.useState(null);
+    //snackbar
     const [open, setOpen] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
 
+    //GENERAL FUNCTIONS  
     const handleClose = () => {
         setAnchorEl(null);
     };
     const handleCloseToast = () => {
         setOpen(false);
     };
+    // MAIN FUNCTIONS
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleNotifications = (event) => {
+
+    }
 
     const handleLogout = () => {
         handleClose()
@@ -38,71 +46,94 @@ const Header = props => {
 
         let options = api.headersConfig(token)
         let body = { uuid: uuid }
-        
-        axios.post(api.signOut,  body, { headers: {
-            ...options,
-          }}).then((res) => {
-                
-                setToastMessage(res.data.message)
-                setOpen(true)
-                if (res.data.success) {
-                    signOut()
-                    setToastType(classes.success)
-                }
-                else setToastType(classes.error)
-                setLoading(false)
-            }).catch(err => {
-                setLoading(false)
-            })
-        }
 
-        const classes = useStyles();
-        // const littleIcons = [colors.primaryLight, colors.tertiary, colors.success]
+        axios.post(api.signOut, body, {
+            headers: {
+                ...options,
+            }
+        }).then((res) => {
 
-        const logout = <div className={classes.logout}>
-            <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-            >
-                <MoreVertIcon />
-            </IconButton>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
-        </div>;
-
-        return (
-            <div className={classes.header}>
-                <Logo color />
-                {(token && uuid && !loading) ? logout : null}
-                <Snackbar
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={open}
-                    autoHideDuration={3000}
-                    onClose={handleCloseToast}
-                    message={
-                        <div className={toastType}>
-                            {toastMessage}
-                        </div>
-                    }
-                    key={vertical + horizontal}
-                />
-                {/* <Text color={colors.dark} type="title" style={{marginLeft: '10px'}}>
-                
-                AppName
-            </Text>  */}
-            </div>
-        );
+            setToastMessage(res.data.message)
+            setOpen(true)
+            if (res.data.success) {
+                signOut()
+                setToastType(classes.success)
+            }
+            else setToastType(classes.error)
+            setLoading(false)
+        }).catch(err => {
+            setToastMessage(errors.serverError)
+            setToastType(classes.error)
+            setOpen(true)
+            setLoading(false)
+        })
     }
 
-    export default Header;
+
+    // const littleIcons = [colors.primaryLight, colors.tertiary, colors.success]
+    const menuToggle = <div className={classes.toggle}>
+        <IconButton
+            aria-label="more"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={handleToggle}
+        >
+            <MoreVertIcon />
+        </IconButton>
+    </div>;
+
+    const rigthWrap = <div className={classes.logout}>
+        <IconButton
+            aria-label="Notificaciones"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={handleNotifications}
+        >
+            <Notifications />
+        </IconButton>
+        <IconButton
+            aria-label="vér mas"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+        >
+            <MoreVertIcon />
+        </IconButton>
+        <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+            <MenuItem onClick={() => changeView(1)}>Dashboard</MenuItem>
+            <MenuItem onClick={() => changeView(2)}>perfil</MenuItem>
+            <MenuItem onClick={() => changeView(3)}>Mi cuenta</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
+    </div>;
+
+    return (
+        <div className={classes.header}>
+            {toggle ? <Logo color /> : <Logo color onlyIcon />}
+            {(token && uuid && !loading) ? menuToggle : null}
+
+            {(token && uuid && !loading) ? rigthWrap : null}
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open}
+                autoHideDuration={3000}
+                onClose={handleCloseToast}
+                message={
+                    <div className={toastType}>
+                        {toastMessage}
+                    </div>
+                }
+                key={vertical + horizontal}
+            />
+
+        </div>
+    );
+}
+
+export default Header;

@@ -28,7 +28,6 @@ const LayoutStyle = makeStyles(theme => ({
         marginRight: 'auto',
         marginTop: 0,
         marginBottom: 0,
-        background: theme.color.primary,
         height: '100%',
         [theme.breakpoints.largeTablet]: {
             overflowX: 'auto',
@@ -65,7 +64,9 @@ const LayoutStyle = makeStyles(theme => ({
         float: "left",
         position: "absolute",
         right: "30px"
-
+    },
+    toggle: {
+        color: theme.color.dark,
     },
     logo: {
         ...logo
@@ -85,42 +86,42 @@ const LayoutStyle = makeStyles(theme => ({
     inverseLogo: {
         ...logo
     },
-    container: {
-        ...theme.grids.twoColumnGrid
+    container: {     
+        ...theme.grids.twoColumnGrid,
     },
-    searchContent: {
-        ...theme.grids.thirdsGrid,
-    },
-    pokemonQuery: {
-        height: '50%',
-        overflowX: 'auto',
-        borderBottom: "#fff solid",
-    },
-    pokemonGrid: {
-        ...theme.grids.fourColumnGrid
-    },
-    iconContainer: {
-        display: 'flex',
-        marginLeft: theme.spacing(3),
-    },
-    blackScreen: {
-        width: '75%',
-        height: '75%',
-        margin: '0  auto',
-        borderRadius: borders.softSquare,
-        backgroundColor: theme.color.contrastDark,
-        ...centeredBox,
-    },
-    ScreenContainer: {
-        width: '230px',
-        height: '200px',
-        margin: '0  auto',
-        marginTop: theme.spacing(1),
-        ...centeredBox,
-        boxShadow: shadows.leftShadow,
-        borderRadius: borders.polygon,
-        backgroundColor: theme.color.light,
-    }
+    // searchContent: {
+    //     ...theme.grids.thirdsGrid,
+    // },
+    // pokemonQuery: {
+    //     height: '50%',
+    //     overflowX: 'auto',
+    //     borderBottom: "#fff solid",
+    // },
+    // pokemonGrid: {
+    //     ...theme.grids.fourColumnGrid
+    // },
+    // iconContainer: {
+    //     display: 'flex',
+    //     marginLeft: theme.spacing(3),
+    // },
+    // blackScreen: {
+    //     width: '75%',
+    //     height: '75%',
+    //     margin: '0  auto',
+    //     borderRadius: borders.softSquare,
+    //     backgroundColor: theme.color.contrastDark,
+    //     ...centeredBox,
+    // },
+    // ScreenContainer: {
+    //     width: '230px',
+    //     height: '200px',
+    //     margin: '0  auto',
+    //     marginTop: theme.spacing(1),
+    //     ...centeredBox,
+    //     boxShadow: shadows.leftShadow,
+    //     borderRadius: borders.polygon,
+    //     backgroundColor: theme.color.light,
+    // }
 }))
 
 export default LayoutStyle

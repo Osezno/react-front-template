@@ -56,30 +56,6 @@ export const signIn = (session) => async dispatch => {
     dispatch(setAuthUser(session));
 }
 
-export const signUp = (email, password, user) => async (dispatch, getState) => {
-    // Firebase.auth.createUserWithEmailAndPassword(email, password)
-    //     .then(authUser => {
-    //         user.clientId = getState().clientState.subdomain;
-    //         const uid = authUser.user.uid;
-    //         Firebase.userFS().doc(uid).set(user);
-    //     })
-    //     .catch(error => {
-    //         switch (error.code) {
-    //             case 'auth/weak-password':
-    //                 error.mensaje = 'La contraseña debe contener mínimo 6 caracteres.'
-    //                 break;
-    //             case 'auth/invalid-email':
-    //                 error.mensaje = 'El correo es inválido.'
-    //                 break;
-    //             case 'auth/email-already-in-use':
-    //                 error.mensaje = 'El correo ya está ligado a una cuenta.'
-    //                 break;
-    //             default:
-    //                 error.mensaje = 'Hubo un error al registrar la cuenta.'
-    //         }
-    //         dispatch(setSessionError(error))
-    //     });;
-}
 
 export const signOut = () => async dispatch => {
     // Firebase.auth.signOut();

@@ -12,11 +12,12 @@ const errors = {
   default: "Faltan datos",
   mail: "El email no es valido",
   mailUnavalible: "El email ya existe en nuestra base de datos",
-  password: "El Password es incorrecto",
-  passwordReq: "El Password no es seguro",
+  password: "El password es incorrecto",
+  passwordReq: "El password no es seguro",
+  passwordEq: "El password no es igual",
   name: "Nombre incorrecto",
   //for login password?
-  noUser: "El Usuario no existe en el sistema",
+  noUser: "El usuario no existe en el sistema",
   session: "Sesión invalida",
   denied: "Permisos insuficientes",
   estatus: "Tu cuenta esta desabilitada",
@@ -34,6 +35,8 @@ const success = {
 }
 
 const Catalogs = {
+  vertical:'bottom',
+  horizontal:'center',
   pageInfo: pageInfo,
   errors:errors,
   success: success

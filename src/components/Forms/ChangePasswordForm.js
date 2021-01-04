@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStyles } from './Form.styles';
-import { checkEmail, checkPasswordLogin } from './validations';
+import { checkEmail, checkPassword, checkEquality } from './validations';
 import catalogs from '../../constants/catalogs';
 import api from '../../constants/api';
 import axios from 'axios';
@@ -18,14 +18,14 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 //import * as ACTIONS from '../../store/actions';
-const { errors,vertical, horizontal } = catalogs
+const { errors, vertical, horizontal } = catalogs
 
 
 
 const SignInForm = (props) => {
-    const {addAuthUser} = props
+    const { uuid, token } = props
     const classes = useStyles();
-   
+
     const [error, setError] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     //snackbar
@@ -33,16 +33,16 @@ const SignInForm = (props) => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
-    
-    
+
+
 
     const [formData, setFormData] = useState({
-        email: undefined,
         password: undefined,
+        password2: undefined,
         showPassword: false
     });
 
-    const { email, password, showPassword } = formData;
+    const { password2, password, showPassword } = formData;
 
     //GENERAL FUNCTIONS
     const handleClickShowPassword = () => {
@@ -50,22 +50,23 @@ const SignInForm = (props) => {
     };
 
     const validate = (data) => {
-        const { password, email } = data;
-        if (!email || !password) {
+        const { password, password2 } = data;
+        if (!password2 || !password) {
             setError(true)
             setErrorMessage(errors.default)
             return false
         }
-        if (checkPasswordLogin(password)) {
+        if (checkPassword(password)) {
             setError(true)
             setErrorMessage(errors.passwordReq)
             return false
         }
-        if (checkEmail(email)) {
+        if (checkEquality(password, password2)) {
             setError(true)
-            setErrorMessage(errors.mail)
+            setErrorMessage(errors.passwordEq)
             return false
         }
+
 
         setError(false)
         setErrorMessage('')
@@ -79,22 +80,22 @@ const SignInForm = (props) => {
 
     //MAIN FUNCTIONS
     const handleChange = event => {
-
+        console.log(event.target.name, event.target.value)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
     const handleSignIn = (event) => {
         event.preventDefault();
         setLoading(true)
-       
-        axios.post(api.signIn, {
-            headers: api.headerConfig,
-            ...formData
-        }).then((res) => {
+        let data = {
+            uuid: uuid,
+            token: token,
+            password: formData.password
+        }
+        axios.post(api.change, data).then((res) => {
             setToastMessage(res.data.message)
-            if(res.data.success){
-                addAuthUser(res.data.data)
-                // add authUser to redux session
+            if (res.data.success) {
+                //redux change
                 setToastType(classes.success)
             }
             else setToastType(classes.error)
@@ -110,23 +111,13 @@ const SignInForm = (props) => {
 
 
     useEffect(() => {
-        if (typeof email !== 'undefined') validate(formData)
-    }, [formData, email])
+        if (typeof password !== 'undefined') validate(formData)
+    }, [formData, password])
 
 
     return (
 
         <form onSubmit={handleSignIn} className={classes.form}>
-            <TextField
-                className={classes.inputs}
-                label="Correo"
-                type="email"
-                size="small"
-                name="email"
-                value={email || ''}
-                onChange={handleChange}
-                focus="true"
-            />
             <TextField
                 className={classes.inputs}
                 type={showPassword ? 'text' : 'password'}
@@ -147,6 +138,15 @@ const SignInForm = (props) => {
                     )
                 }}
             />
+            <TextField
+                className={classes.inputs}
+                type={showPassword ? 'text' : 'password'}
+                label="Contraseña"
+                name="password2"
+                value={password2 || ''}
+                onChange={handleChange}
+
+            />
             {error && <Typography variant="subtitle2" color="error">{errorMessage}</Typography>}
             <Button
                 // className={classes.inputs}
@@ -156,7 +156,7 @@ const SignInForm = (props) => {
                 disabled={error || loading}
                 style={{ textTransform: 'none', marginTop: 10 }}
             >
-                {loading ? "Cargando..." : "Iniciar sesión"}
+                {loading ? "Cargando..." : "Cambiar contraseña"}
             </Button>
             <Snackbar
                 anchorOrigin={{ vertical, horizontal }}

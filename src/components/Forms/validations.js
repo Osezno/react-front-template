@@ -27,6 +27,13 @@ export const checkPassword = (password) => {
     }
     else { return false }
 }
+export const checkEquality= (password, password2) => {
+   
+    if (password !== password2) {
+        return true;
+    }
+    else { return false }
+}
 export const checkPasswordLogin = (password) => {
    
     if (checkLength(password, 8, 30) ||

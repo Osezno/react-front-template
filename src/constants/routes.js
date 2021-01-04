@@ -10,7 +10,7 @@ export const ONBOARDING_COMPETENCIES = '/onboarding/competencias';
 export const ONBOARDING_TOPICS = '/onboarding/temas';
 
 export const PASSWORD_FORGET = '/pwd-forget';
-export const CHANGE_PASSWORD = '/pwd-forget';
+export const CHANGE_PASSWORD = '/recovery/:tmp/:id';
 // Student
 export const DASHBOARD = '/';
 export const NETWORK = '/network';
