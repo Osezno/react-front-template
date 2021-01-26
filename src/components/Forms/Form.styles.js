@@ -9,12 +9,21 @@ const box= {
 }
 
 export const useStyles = makeStyles(theme => ({
-   
-    form: {
+    modal:{
+        background:"#fff"
+    },
+    form:{
         width: '70%',
         display: 'flex',
         flexDirection: 'column',
         marginBottom: '10px',
+    },
+    form2: {
+        width: '70%',
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '10px',
+        margin:'0 auto'
     },
     inputs: {
         margin: 4,
@@ -32,7 +41,8 @@ export const useStyles = makeStyles(theme => ({
         width: '100px',
         height:'100px',
         position:'relative',
-        backgroundSize:'cover'
+        backgroundSize:'cover',
+        borderRadius: '50px'
       //  borderRadius:'50%',
     },
     picture:{

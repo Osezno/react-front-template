@@ -26,10 +26,13 @@ const sesiones = {
 }
 
 const usuarios = {
+    
     nuevoUsuario: mainUrl + "/api/v1/nuevo-usuario",
     verUsuarios: mainUrl + "api/v1/ver-usuarios",
     verPerfil: mainUrl + "api/v1/ver-perfil",
     updateProfile: mainUrl + "api/v1/editar-perfil",
+    updateUser: mainUrl + "api/v1/editar-usuario",
+    updateUserPic: mainUrl + "api/v1/editar-usuario-fotografia",
     updateProfilePic: mainUrl + "api/v1/actualizar-mi-foto",
 }
 

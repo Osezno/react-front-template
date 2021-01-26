@@ -13,6 +13,14 @@ export const useStyles = makeStyles(theme => ({
         borderRadius: '30px',
         maxWidth: '50px'
     },
+    modalWrap: {
+        background: '#fff',
+        width: '70%',
+        margin: '0 auto',
+        marginTop: '10px',
+        padding: '9px',
+        overflow: 'scroll',
+    },
     success: {
         backgroundColor: theme.color.success,
         ...box

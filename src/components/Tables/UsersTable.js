@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStyles } from './Tables.styles';
 import catalogs from '../../constants/catalogs';
+import EditUserForm from '../Forms/EditUserForm';
 import api from '../../constants/api';
 import axios from 'axios';
 import {
@@ -16,6 +17,7 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Modal,
     Paper
 } from '@material-ui/core'
 //import * as ACTIONS from '../../store/actions';
@@ -36,7 +38,17 @@ const UsersTable = (props) => {
     const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
+    const [editUser, setEditUser] = useState({});
+    const [openModal, setOpenModal] = React.useState(false);
 
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setEditUser({})
+        setOpenModal(false);
+    };
     //GENERAL FUNCTIONS
     const handleCloseToast = () => {
         setOpen(false);
@@ -73,21 +85,21 @@ const UsersTable = (props) => {
         })
     }
     const renderImage = (url) => {
-        // code for empty  url
         return <img alt="foto" className={css.profile} src={url} />;
     }
+
     const renderButton = (user) => {
         return <IconButton
             aria-label="Editar"
-            onClick={() => {  editar(user) }}
+            onClick={() => { editar(user) }}
         >
             <Edit />
         </IconButton>;
     }
+
     const editar = (user) => {
-        //open modal
-        // open form
-        console.log(user)
+        setEditUser(user)
+        handleOpenModal()
     }
 
     //USEEFFECTS
@@ -133,6 +145,15 @@ const UsersTable = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Modal
+                className={css.modal}
+                open={openModal}
+                onClose={handleCloseModal}
+            >
+                <div className={css.modalWrap} >
+                    <EditUserForm editUser={editUser} authUser={authUser} />
+                </div>
+            </Modal>
             <Snackbar
                 anchorOrigin={{ vertical, horizontal }}
                 open={open}
