@@ -26,16 +26,6 @@ const App = (props) => {
       {authUser ? <Main authUser={authUser} /> : <Preloader />}
     </>
 
-    // <div className={classes.app}>
-    //   <header className={classes.appHeader}>
-    //     <img src={logo} className={classes.logo} alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    // </p>
-
-    //   </header>
-    // </div>
-
   );
 }
 const mapStateToProps = state => {

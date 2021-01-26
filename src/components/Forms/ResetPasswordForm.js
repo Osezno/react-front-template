@@ -18,7 +18,7 @@ import {
 
 
 
-const { errors, vertical, horizontal } = catalogs
+const { errors, vertical, horizontal, inputStr } = catalogs
 
 const ResetPasswordForm = (props) => {
 
@@ -104,7 +104,7 @@ const ResetPasswordForm = (props) => {
         <form onSubmit={handleResetPassword} className={classes.form}>
             <TextField
                 className={classes.inputs}
-                label="Correo"
+                label={inputStr.email}
                 type="email"
                 size="small"
                 name="email"
@@ -122,7 +122,7 @@ const ResetPasswordForm = (props) => {
                 disabled={error || loading}
                 style={{ textTransform: 'none', marginTop: 10 }}
             >
-                Solicitar correo
+                {inputStr.updatePassword}
            </Button>
            <Snackbar
                 anchorOrigin={{vertical, horizontal }}

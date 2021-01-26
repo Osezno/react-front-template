@@ -9,12 +9,12 @@ const box= {
 }
 
 export const useStyles = makeStyles(theme => ({
-
+   
     form: {
         width: '70%',
         display: 'flex',
         flexDirection: 'column',
-        marginBottom: '10px'
+        marginBottom: '10px',
     },
     inputs: {
         margin: 4,
@@ -27,6 +27,23 @@ export const useStyles = makeStyles(theme => ({
     error: {
         backgroundColor: theme.color.error,
         ...box
+    },
+    pictureWrap:{
+        width: '100px',
+        height:'100px',
+        position:'relative',
+        backgroundSize:'cover'
+      //  borderRadius:'50%',
+    },
+    picture:{
+        width: '100px',
+        height:'100px',
+       
+      //  borderRadius:'50%',
+    },
+    belowDivIcon:{
+        position:'absolute',
+        bottom:'0px',
+        right:'0px',
     }
-
 }));

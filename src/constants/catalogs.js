@@ -16,6 +16,8 @@ const errors = {
   passwordReq: "El password no es seguro",
   passwordEq: "El password no es igual",
   name: "Nombre incorrecto",
+  invalidName: "El nombre no es valido",
+  invalidNumber:"El numero no es valido",
   //for login password?
   noUser: "El usuario no existe en el sistema",
   session: "Sesión invalida",
@@ -34,12 +36,55 @@ const success = {
   emailSend: "¡Correo enviado! revisa tu bandeja de entrada."
 }
 
+const pages = {
+  account: "Mi cuenta",
+  dashboard: "Dashboard",
+  profile: "Perfíl",
+  users: "Usuarios",
+  newUser: "Nuevo usuario",
+  reports: "Reportes",
+}
+
+const inputs = {
+    // buttons
+    load:"Cargando",
+    update:"Actualizar información",
+    changePassword:"Cambiar contraseña",
+    updatePassword:"Solicitar correo",
+    login:"Iniciar sesión",
+    // Labels
+    password:"Contraseña",
+    confirmPassword:"Confirmar Contraseña",
+    name:"Nombre",
+    tel:"Telefóno",
+    email:"Correo",
+    status:"Estatus",
+    rol:"Rol",
+}
+
+const rol = {
+  "1":"Admin",
+  "2":"Manager",
+  "3":"Associate"
+}
+
+const estatus = {
+  "2":"Activo",
+  "3":"Pendiente",
+  "4":"Suspendido",
+  "5":"Eliminado"
+}
+
 const Catalogs = {
   vertical:'bottom',
   horizontal:'center',
+  inputStr:inputs,
   pageInfo: pageInfo,
   errors:errors,
-  success: success
+  success: success,
+  rol:rol,
+  estatus:estatus,
+  pages:pages
 }
 
 export default Catalogs;

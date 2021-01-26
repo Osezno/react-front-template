@@ -11,23 +11,25 @@ import * as serviceWorker from './serviceWorker';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
-
+import { BrowserRouter } from 'react-router-dom';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    reducers,
-    composeEnhancers(applyMiddleware(thunk))
+  reducers,
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
   <Provider store={store}>
-   
+
     <ThemeProvider theme={theme}>
       {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
       <CssBaseline />
       {/* <React.StrictMode> */}
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
       {/* </React.StrictMode>, */}
     </ThemeProvider>
   </Provider>

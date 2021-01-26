@@ -8,7 +8,7 @@ const centeredBox = {
     justifyContent: 'center',
 }
 
-const box= {
+const box = {
     width: '100%',
     padding: '7px',
     borderRadius: '4px'
@@ -19,6 +19,7 @@ const logo = {
     margin: 2
 }
 const LayoutStyle = makeStyles(theme => ({
+    ...theme.animations,
     root: {
         position: 'relative',
         display: 'block',
@@ -86,8 +87,27 @@ const LayoutStyle = makeStyles(theme => ({
     inverseLogo: {
         ...logo
     },
-    container: {     
+    container: {
         ...theme.grids.twoColumnGrid,
+    },
+    unavailable: {
+        overflow: 'auto',
+        height: "100vh",
+        ...centeredBox
+    },
+    letrero: {
+        animation:`$fadeUp ease-in  3s `,
+        border: 'solid',
+        padding: '20px',
+        borderRadius: '10px',
+    },
+    title: {
+        ...theme.typography.title,
+        color: theme.color.secondary
+    },
+    subtitle: {
+        ...theme.typography.subtitle,
+        color: theme.color.primary
     },
     // searchContent: {
     //     ...theme.grids.thirdsGrid,

@@ -18,7 +18,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 //import * as ACTIONS from '../../store/actions';
-const { errors,vertical, horizontal } = catalogs
+const { errors,vertical, horizontal, inputStr } = catalogs
 
 
 
@@ -119,7 +119,7 @@ const SignInForm = (props) => {
         <form onSubmit={handleSignIn} className={classes.form}>
             <TextField
                 className={classes.inputs}
-                label="Correo"
+                label={inputStr.email}
                 type="email"
                 size="small"
                 name="email"
@@ -130,7 +130,7 @@ const SignInForm = (props) => {
             <TextField
                 className={classes.inputs}
                 type={showPassword ? 'text' : 'password'}
-                label="Contraseña"
+                label={inputStr.password}
                 name="password"
                 value={password || ''}
                 onChange={handleChange}
@@ -156,7 +156,7 @@ const SignInForm = (props) => {
                 disabled={error || loading}
                 style={{ textTransform: 'none', marginTop: 10 }}
             >
-                {loading ? "Cargando..." : "Iniciar sesión"}
+                {loading ? inputStr.load : inputStr.login}
             </Button>
             <Snackbar
                 anchorOrigin={{ vertical, horizontal }}

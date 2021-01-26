@@ -18,6 +18,7 @@ import * as ACTIONS from '../store/actions';
 import SignIn from './Account/SignIn';
 import ResetPassword from './Account/ResetPassword';
 import ChangePassword from './Account/ChangePassword';
+import catalogs from '../constants/catalogs';
 //import NoAccess from 'containers/Content/NoAccess';
 //import Pagination from '../../containers/Controls/Pagination'
 
@@ -26,51 +27,67 @@ const useStyles = LayoutStyle
 
 const Main = props => {
     const { authUser, signOut } = props
-    const {uuid, token} = authUser
+    const { uuid, token, id_estatus } = authUser
     const [toggle, setToggle] = useState(true);
-    const [view, setView] = useState(true);
-    const classes = useStyles();
+    const css = useStyles();
     // views para diferentes roles
-    const handleToggle =()=>{
+    const handleToggle = () => {
         setToggle(!toggle)
     }
-    const changeView =(view)=>{
-        console.log(view)
-        setView(view)
+   
+    const accountUnavailable = () => {
+        let body = <div className={css.unavailable}>
+            <div className={css.letrero}>
+                <h1 className={css.title}>{`TU CUENTA ESTA`}</h1>
+                <h1 className={css.title}>{`DESACTIVADA`}</h1>
+                <h2 className={css.subtitle}>{`Su estatus es "${catalogs.estatus[id_estatus]}"...`}</h2>
+            </div>
+        </div>;
+
+        return body
+    }
+
+    const checkEstatus = () => {
+        if (id_estatus === "2") return <Dashboard toggle={toggle} />;
+        else return accountUnavailable();
     }
 
     return (
-        <div className={classes.root}>
-            <Header toggle={toggle} changeView={()=> changeView} handleToggle={() => handleToggle()} signOut={() => signOut()} authUser={authUser}  />
-            {
-                (token && uuid) ?
-                    <Dashboard toggle={toggle} view={view} />
-                    :
-                    <Router>
-                        <>
-                            <Switch>
-                                <Route exact path={ROUTES.SIGN_IN} render={(props) => <SignIn />} />
-                                <Route exact path={ROUTES.PASSWORD_FORGET} render={(props) => <ResetPassword />} />
-                                <Route exact path={ROUTES.CHANGE_PASSWORD} render={(props) => <ChangePassword />} /> 
-                                <Redirect to={ROUTES.SIGN_IN} />
-                            </Switch>
-                        </>
-                    </Router>
-            }
-            <Footer authUser={authUser} />
+
+        <div className={css.root}>
+            <Router>
+                <Header
+                    toggle={toggle}
+                    handleToggle={() => handleToggle()}
+                    signOut={() => signOut()}
+                    authUser={authUser} />
+                {
+                    (token && uuid) ? checkEstatus()
+                        :
+
+                        <Switch>
+                            <Route exact path={ROUTES.SIGN_IN} render={(props) => <SignIn />} />
+                            <Route exact path={ROUTES.PASSWORD_FORGET} render={(props) => <ResetPassword />} />
+                            <Route exact path={ROUTES.CHANGE_PASSWORD} render={(props) => <ChangePassword />} />
+                            <Redirect to={ROUTES.SIGN_IN} />
+                        </Switch>
+
+                }
+                <Footer authUser={authUser} />
+            </Router>
         </div>
     );
 }
 
 const mapStateToProps = state => {
     return {
-      
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      signOut: () => dispatch(ACTIONS.signOut())
+        signOut: () => dispatch(ACTIONS.signOut())
     }
 }
 

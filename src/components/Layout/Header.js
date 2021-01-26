@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import LayoutStyle from './Layout.style'
 import Logo from './Logo'
-import { IconButton, Menu, MenuItem, Snackbar, } from '@material-ui/core'
+import { useHistory } from 'react-router-dom';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { IconButton, Menu, MenuItem, Snackbar } from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import catalogs from '../../constants/catalogs';
 import api from '../../constants/api';
+import * as ROUTES from '../../constants/routes';
 import axios from 'axios';
 import Notifications from '@material-ui/icons/Notifications';
 
-const { errors, vertical, horizontal } = catalogs
+const { errors, vertical, horizontal,pages,rol } = catalogs
 const useStyles = LayoutStyle
 
 const Header = props => {
     const classes = useStyles();
-    const { authUser, signOut, handleToggle, toggle, changeView } = props
-    const { uuid, token } = authUser
+    const { authUser, signOut, handleToggle, toggle } = props
+    const history = useHistory();
+  
+    const { uuid, token, id_rol } = authUser
     const [anchorEl, setAnchorEl] = React.useState(null);
     //snackbar
     const [open, setOpen] = useState(false);
@@ -62,12 +67,20 @@ const Header = props => {
             else setToastType(classes.error)
             setLoading(false)
         }).catch(err => {
+            // no esta funcionando
+            console.log(err)
             setToastMessage(errors.serverError)
             setToastType(classes.error)
             setOpen(true)
             setLoading(false)
         })
     }
+
+    const navigateTo = (route) => {
+        history.push(route);
+        window.scrollTo(0, 0);
+    }
+
 
 
     // const littleIcons = [colors.primaryLight, colors.tertiary, colors.success]
@@ -106,9 +119,11 @@ const Header = props => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={() => changeView(1)}>Dashboard</MenuItem>
-            <MenuItem onClick={() => changeView(2)}>perfil</MenuItem>
-            <MenuItem onClick={() => changeView(3)}>Mi cuenta</MenuItem>
+            <MenuItem onClick={() => navigateTo(ROUTES.ACCOUNT)}>{pages.account}</MenuItem>
+            <MenuItem onClick={() => navigateTo(ROUTES.DASHBOARD)}>{pages.dashboard}</MenuItem>
+            <MenuItem onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     </div>;
@@ -136,4 +151,4 @@ const Header = props => {
     );
 }
 
-export default Header;
+export default withRouter(Header);

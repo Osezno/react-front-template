@@ -10,7 +10,7 @@ export const checkNull = (x) => {
 
 export const checkLength = (x, minus, max) => {
 
-    if ( x.length < minus || x.length > max) {
+    if (x.length < minus || x.length > max) {
         return true;
     }
     else {
@@ -27,15 +27,15 @@ export const checkPassword = (password) => {
     }
     else { return false }
 }
-export const checkEquality= (password, password2) => {
-   
+export const checkEquality = (password, password2) => {
+
     if (password !== password2) {
         return true;
     }
     else { return false }
 }
 export const checkPasswordLogin = (password) => {
-   
+
     if (checkLength(password, 8, 30) ||
         checkNull(password)) {
         return true;
@@ -44,8 +44,12 @@ export const checkPasswordLogin = (password) => {
 }
 
 export const checkNumber = (x, minus, max) => {
-    if (typeof x.length < minus || x.length > max) return true;
-    else return false
+    let re_number = new RegExp(/^[0-9]*$/);
+    if (!re_number.test(x) ||
+        checkLength(x, minus, max)) {
+        return true;
+    }
+    else { return false }
 }
 
 export const checkEmail = (email) => {
@@ -61,9 +65,31 @@ export const checkEmail = (email) => {
     else { return false }
 }
 
-export const checkImage = (image) => {
-    //check null
-    //check size
-    //resize
-    //return
+export const nullInObj = (obj) => {
+    let nulls = []
+    for (var prop in obj) {
+        if (checkNull(obj[prop])) nulls.push(prop)
+    }
+    return nulls
+}
+
+export const resizeImage = (image, width, height) => {
+    return new Promise((res, rej) => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image
+        imgElement.onload = (e) => {
+            const canvas = document.createElement("canvas");
+            const aspectRatio = width / e.target.width
+            canvas.width = width;
+            canvas.height = e.target.height * aspectRatio;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height)
+            const fileResized = ctx.canvas.toDataURL(e.target, "image/jpeg");
+            res(fileResized);
+            // ctx.canvas.toBlob((blob) => {
+            //     res([fileResized, blob]);
+            // });
+
+        }
+    });
 }
