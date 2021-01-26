@@ -19,7 +19,7 @@ const { errors, vertical, horizontal, rol, estatus, inputStr } = catalogs
 
 
 const EditUserForm = (props) => {
-    const { authUser, editUser } = props
+    const { authUser, editUser, handleUserChanged } = props
     const { uuid, token } = authUser
     
 
@@ -92,30 +92,6 @@ const EditUserForm = (props) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    // const getUserInfo = () => {
-    //     let body = { uuid: uuid }
-    //     let options = api.headersConfig(token)
-    //     setLoading(true)
-    //     axios.post(api.usuarios.verPerfil, body, {
-    //         headers: {
-    //             ...options,
-    //         }
-    //     }).then((res) => {
-    //         setToastMessage(res.data.message)
-    //         if (res.data.success) {
-    //             setFormData({ uuid: editUser.uuid, ...res.data.data })
-    //             setToastType(classes.success)
-    //         }
-    //         else setToastType(classes.error)
-    //         setOpen(true)
-    //         setLoading(false)
-    //     }).catch(err => {
-    //         setToastMessage(errors.serverError)
-    //         setToastType(classes.error)
-    //         setOpen(true)
-    //         setLoading(false)
-    //     })
-    // }
     const updateProfile = (newPic) => {
         //  migth be better to handle some picture uploads in client than in server... 
         let url = api.usuarios.updateUser;
@@ -125,7 +101,6 @@ const EditUserForm = (props) => {
             url = api.usuarios.updateUserPic
             formData['fotografia'] = previewImg
         }
-        console.log(formData)
         setLoading(true)
         axios.post(url, formData, {
             headers: {
@@ -135,6 +110,7 @@ const EditUserForm = (props) => {
             setToastMessage(res.data.message)
             if (res.data.success) {
                 setToastType(classes.success)
+                handleUserChanged(res.data.data)
             }
             else setToastType(classes.error)
             setOpen(true)
@@ -169,13 +145,10 @@ const EditUserForm = (props) => {
 
         }
     }
+
     const openImageBrowser = () => {
         inputFile.current.click();
     }
-    //USEEFFECTS
-    // useEffect(() => {
-    //     getUserInfo()
-    // }, [])
 
     useEffect(() => {
         validate(formData)

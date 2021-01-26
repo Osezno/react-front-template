@@ -39,6 +39,7 @@ const UsersTable = (props) => {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState({});
+    const [userIndex, setUserIndex] = useState(0);
     const [openModal, setOpenModal] = React.useState(false);
 
     const handleOpenModal = () => {
@@ -47,6 +48,7 @@ const UsersTable = (props) => {
 
     const handleCloseModal = () => {
         setEditUser({})
+        setUserIndex(0)
         setOpenModal(false);
     };
     //GENERAL FUNCTIONS
@@ -88,18 +90,27 @@ const UsersTable = (props) => {
         return <img alt="foto" className={css.profile} src={url} />;
     }
 
-    const renderButton = (user) => {
+    const renderButton = (user, index) => {
         return <IconButton
             aria-label="Editar"
-            onClick={() => { editar(user) }}
+            onClick={() => { editar(user,index) }}
         >
             <Edit />
         </IconButton>;
     }
 
-    const editar = (user) => {
+    const editar = (user, i) => {
+        console.log(i)
+        setUserIndex(i)
         setEditUser(user)
         handleOpenModal()
+    }
+
+    const handleUserChanged = (UserChanged)=> {
+        console.log(UserChanged)
+        let newUsersArray = [...users];
+        newUsersArray[userIndex] = UserChanged;
+        setUsers(newUsersArray);
     }
 
     //USEEFFECTS
@@ -108,8 +119,8 @@ const UsersTable = (props) => {
     }, [])
 
     useEffect(() => {
-        if (users.length) console.log(users)
-    }, [users])
+         if (users.length) console.log(users)
+     }, [users])
 
 
 
@@ -129,7 +140,7 @@ const UsersTable = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {users.map((user) => (
+                        {users.map((user,index) => (
                             <TableRow key={user.uuid}>
                                 <TableCell component="th" >
                                     {renderImage(user.fotografia)}
@@ -139,7 +150,7 @@ const UsersTable = (props) => {
                                 <TableCell >{user.telefono}</TableCell>
                                 <TableCell >{estatus[user.id_estatus]}</TableCell>
                                 <TableCell >{rol[user.id_rol]}</TableCell>
-                                <TableCell > {renderButton(user)}</TableCell>
+                                <TableCell > {renderButton(user,index)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -151,7 +162,7 @@ const UsersTable = (props) => {
                 onClose={handleCloseModal}
             >
                 <div className={css.modalWrap} >
-                    <EditUserForm editUser={editUser} authUser={authUser} />
+                    <EditUserForm editUser={editUser} authUser={authUser} handleUserChanged={handleUserChanged} />
                 </div>
             </Modal>
             <Snackbar
