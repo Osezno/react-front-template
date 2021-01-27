@@ -24,7 +24,7 @@ const typography = {
         fontFamily: 'adelle-sans, sans-serif',
         fontWeight: 400,
         fontSize: 11,
-        lineHeight: '12px',
+        lineHeight: '14px',
         letterSpacing: .2
     },
     button: "",

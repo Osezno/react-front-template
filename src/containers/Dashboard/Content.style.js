@@ -20,10 +20,12 @@ const ContentStyle = makeStyles(theme => ({
     wrapper:{
         overflow:'auto',
         height: "calc(100vh - 60px)",
+        padding:theme.padding,
     },
     titleWrapper:{
         ...centeredBox,
-        justifyContent:"left",
+        justifyContent:"center",
+        marginLeft: theme.margin
     },
     title:{
         color: theme.color.secoundary,
@@ -33,7 +35,7 @@ const ContentStyle = makeStyles(theme => ({
         ...theme.grids.dashboardGrid
     },
     dashboard2:{
-        ...theme.grids.dashboardGrid2
+        ...theme.grids.dashboardGrid2,
     },
     twoGrid:{
         ...theme.grids.twoColumnGrid

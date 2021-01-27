@@ -15,7 +15,7 @@ const { errors, vertical, horizontal,pages,rol } = catalogs
 const useStyles = LayoutStyle
 
 const Header = props => {
-    const classes = useStyles();
+    const css = useStyles();
     const { authUser, signOut, handleToggle, toggle } = props
     const history = useHistory();
   
@@ -62,15 +62,15 @@ const Header = props => {
             setOpen(true)
             if (res.data.success) {
                 signOut()
-                setToastType(classes.success)
+                setToastType(css.success)
             }
-            else setToastType(classes.error)
+            else setToastType(css.error)
             setLoading(false)
         }).catch(err => {
             // no esta funcionando
             console.log(err)
             setToastMessage(errors.serverError)
-            setToastType(classes.error)
+            setToastType(css.error)
             setOpen(true)
             setLoading(false)
         })
@@ -84,7 +84,7 @@ const Header = props => {
 
 
     // const littleIcons = [colors.primaryLight, colors.tertiary, colors.success]
-    const menuToggle = <div className={classes.toggle}>
+    const menuToggle = <div className={css.toggle}>
         <IconButton
             aria-label="more"
             aria-controls="long-menu"
@@ -95,7 +95,7 @@ const Header = props => {
         </IconButton>
     </div>;
 
-    const rigthWrap = <div className={classes.logout}>
+    const rigthWrap = <div className={css.logout}>
         <IconButton
             aria-label="Notificaciones"
             aria-controls="long-menu"
@@ -119,17 +119,17 @@ const Header = props => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={() => navigateTo(ROUTES.ACCOUNT)}>{pages.account}</MenuItem>
-            <MenuItem onClick={() => navigateTo(ROUTES.DASHBOARD)}>{pages.dashboard}</MenuItem>
-            <MenuItem onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
-            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
-            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.ACCOUNT)}>{pages.account}</MenuItem>
+            <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.DASHBOARD)}>{pages.dashboard}</MenuItem>
+            <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem   className={css.mItem} onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
+            <MenuItem  className={css.mItem} onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     </div>;
 
     return (
-        <div className={classes.header}>
+        <div className={css.header}>
             {toggle ? <Logo color /> : <Logo color onlyIcon />}
             {(token && uuid && !loading) ? menuToggle : null}
 

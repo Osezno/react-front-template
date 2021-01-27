@@ -1,6 +1,4 @@
 import { makeStyles } from '@material-ui/styles';
-import shadows from '../../constants/shadows';
-import borders from '../../constants/borders';
 
 const centeredBox = {
     display: 'flex',
@@ -20,6 +18,11 @@ const logo = {
 }
 const LayoutStyle = makeStyles(theme => ({
     ...theme.animations,
+    mItem:{
+        [theme.breakpoints.largeTablet]: {
+            minHeight: "30px !important",
+        }
+    },
     root: {
         position: 'relative',
         display: 'block',
@@ -53,7 +56,13 @@ const LayoutStyle = makeStyles(theme => ({
         height: '26px',
         zIndex: 1,
         [theme.breakpoints.largeTablet]: {
-            position: 'static',
+            ...theme.grids.oneColumnGrid,
+        }
+      
+    },
+    footerLink: {
+        [theme.breakpoints.largeTablet]: {
+            display: 'none',
         }
     },
     logoContainer: {
@@ -96,7 +105,7 @@ const LayoutStyle = makeStyles(theme => ({
         ...centeredBox
     },
     letrero: {
-        animation:`$fadeUp ease-in  3s `,
+        animation: `$fadeUp ease-in  3s `,
         border: 'solid',
         padding: '20px',
         borderRadius: '10px',
@@ -109,39 +118,7 @@ const LayoutStyle = makeStyles(theme => ({
         ...theme.typography.subtitle,
         color: theme.color.primary
     },
-    // searchContent: {
-    //     ...theme.grids.thirdsGrid,
-    // },
-    // pokemonQuery: {
-    //     height: '50%',
-    //     overflowX: 'auto',
-    //     borderBottom: "#fff solid",
-    // },
-    // pokemonGrid: {
-    //     ...theme.grids.fourColumnGrid
-    // },
-    // iconContainer: {
-    //     display: 'flex',
-    //     marginLeft: theme.spacing(3),
-    // },
-    // blackScreen: {
-    //     width: '75%',
-    //     height: '75%',
-    //     margin: '0  auto',
-    //     borderRadius: borders.softSquare,
-    //     backgroundColor: theme.color.contrastDark,
-    //     ...centeredBox,
-    // },
-    // ScreenContainer: {
-    //     width: '230px',
-    //     height: '200px',
-    //     margin: '0  auto',
-    //     marginTop: theme.spacing(1),
-    //     ...centeredBox,
-    //     boxShadow: shadows.leftShadow,
-    //     borderRadius: borders.polygon,
-    //     backgroundColor: theme.color.light,
-    // }
+  
 }))
 
 export default LayoutStyle

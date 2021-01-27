@@ -13,7 +13,7 @@ const MenuIcons = props => {
     
 
     return (
-        <div className={css.menu}>
+        <div id={"menu"} className={css.menu}>
            
         </div>
 

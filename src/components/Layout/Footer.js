@@ -9,19 +9,19 @@ const useStyles = LayoutStyle
 
 const Footer = props => {
    // const { authUser } = props
-    const classes = useStyles();
+    const css = useStyles();
     //const littleIcons = [colors.primaryLight, colors.tertiary, colors.success]
 
 
 
     return (
-        <div className={classes.footer}>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
+        <div className={css.footer}>
+            <p className={css.footerLink}></p>
+            <p className={css.footerLink}></p>
+            <p className={css.footerLink}></p>
+            <p className={css.footerLink}></p>
+            <p className={css.footerLink}></p>
+            <p className={css.footerLink}></p>
             <Text color={colors.lightest} type="small">
              {catalogs.pageInfo.footerMessage}
             </Text>

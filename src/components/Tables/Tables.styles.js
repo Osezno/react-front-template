@@ -15,11 +15,18 @@ export const useStyles = makeStyles(theme => ({
     },
     modalWrap: {
         background: '#fff',
-        width: '70%',
+        width: '40%',
         margin: '0 auto',
         marginTop: '10px',
         padding: '9px',
         overflow: 'scroll',
+        height: '90vh',
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+        [theme.breakpoints.largeTablet]: {
+            width: '70%',
+        }
     },
     success: {
         backgroundColor: theme.color.success,

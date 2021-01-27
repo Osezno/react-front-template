@@ -28,7 +28,7 @@ const useStyles = LayoutStyle
 const Main = props => {
     const { authUser, signOut } = props
     const { uuid, token, id_estatus } = authUser
-    const [toggle, setToggle] = useState(true);
+    const [toggle, setToggle] = useState(false);
     const css = useStyles();
     // views para diferentes roles
     const handleToggle = () => {

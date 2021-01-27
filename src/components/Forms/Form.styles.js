@@ -16,14 +16,8 @@ export const useStyles = makeStyles(theme => ({
         width: '70%',
         display: 'flex',
         flexDirection: 'column',
-        marginBottom: '10px',
-    },
-    form2: {
-        width: '70%',
-        display: 'flex',
-        flexDirection: 'column',
-        marginBottom: '10px',
-        margin:'0 auto'
+        margin: '0 auto',
+        marginBottom: '10px',    
     },
     inputs: {
         margin: 4,
@@ -42,7 +36,8 @@ export const useStyles = makeStyles(theme => ({
         height:'100px',
         position:'relative',
         backgroundSize:'cover',
-        borderRadius: '50px'
+        borderRadius: '50px',
+        margin: '0 auto',
       //  borderRadius:'50%',
     },
     picture:{

@@ -12,6 +12,10 @@ const theme = createMuiTheme({
   breakpoints:{...breakpoints},
   typography:{...typography},
   //shadows:{...shadows},
+  padding:'10px',
+  bigPadding:'30px',
+  margin:'10px',
+  bigMargin:'30px',
   animations:{...animations},
   palette: {
     primary: {

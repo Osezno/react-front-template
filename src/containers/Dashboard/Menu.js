@@ -12,7 +12,7 @@ const Menu = props => {
 
 
     return (
-        <div className={css.menu}>
+        <div  className={css.menu}>
             
         </div>
 

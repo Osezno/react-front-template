@@ -5,11 +5,11 @@ import animations from '../../constants/animations';
 
 export const useStyles = makeStyles(theme => ({
     ...animations,
-    fade:{
-        animation:`$fadeDown ease-in  3s `
+    fade: {
+        animation: `$fadeDown ease-in  3s `
     },
-    contentWrapper:{
-        
+    contentWrapper: {
+
     },
     infoRoot: {
         width: '70%',
@@ -21,7 +21,7 @@ export const useStyles = makeStyles(theme => ({
         letterSpacing: 1
     },
     highligth: {
-        weigth:600,
+        weigth: 600,
         display: 'inline !important',
         color: theme.color.primary
     },
@@ -40,6 +40,9 @@ export const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         height: '100vh',
         borderRadius: 0,
+        [theme.breakpoints.mediumTablet]: {
+            flexWrap: 'wrap'
+        }
     },
     content: {
         minWidth: '40%',
@@ -48,15 +51,21 @@ export const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        [theme.breakpoints.mediumTablet]: {
+            width: '80%',
+        },
+        [theme.breakpoints.largePhone]: {
+            width: '100%',
+        },
     },
     linkContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: 10,
-        marginBottom:'10px'
+        marginBottom: '10px'
     },
-    viewRoot:{
+    viewRoot: {
         position: 'relative',
         backgroundColor: theme.color.secondary,
         backgroundSize: 'cover',
@@ -67,19 +76,22 @@ export const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.mediumTablet]: {
+            display: 'none'
+        }
     },
-    textBox:{
+    textBox: {
         width: '40%',
         height: 'auto',
         borderRadius: '10px',
         background: '#ffffff3d',
     },
-    textContainer:{
+    textContainer: {
         width: '70%',
         height: 'auto',
-      
+
     },
     cover: {
-        
+
     }
 }));

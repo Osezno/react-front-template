@@ -157,7 +157,7 @@ const EditUserForm = (props) => {
 
     return (
 
-        <form onSubmit={preUpdateProfile} className={classes.form2}>
+        <form onSubmit={preUpdateProfile} className={classes.form}>
             <div className={classes.pictureWrap} style={{ backgroundImage: `url("${previewImg != "" ? previewImg : fotografia}")` }}>
                 <IconButton
                     className={classes.belowDivIcon}
