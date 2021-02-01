@@ -3,7 +3,7 @@ import { CLEARSTORE } from '../actions/types';
 
 
 import session from './session';
-// import user from './user';
+import toast from './toast';
 // import admin from './admin';
 /*
 export default combineReducers({
@@ -20,6 +20,7 @@ export default combineReducers({
 */
  const appReducer = combineReducers({
     sessionState: session,
+    toastState:toast
 });
 
 const rootReducer = (state, action) => {

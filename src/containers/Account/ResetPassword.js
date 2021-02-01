@@ -23,7 +23,7 @@ import View from './accountComponents/View';
 
 
 const ResetPassword = (props) => {
-    
+    const { addToast} = props
     const { pageInfo } = catalogs
     const classes = useStyles();
 
@@ -34,7 +34,7 @@ const ResetPassword = (props) => {
                 <div className={classes.content}>
 
                     <Info title={"lorem Ipsum"} highlight={"dolor amet"} message={pageInfo.welcomeMessage} /> 
-                    <ResetPasswordForm />
+                    <ResetPasswordForm addToast={(toast) => addToast(toast)} />
                     <div className={classes.linkContainer}>
                         <Link
                             variant="subtitle2"
@@ -58,13 +58,13 @@ const ResetPassword = (props) => {
 
 const mapStateToProps = state => {
     return {
-        error: state.sessionState.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        signIn: (email, password) => dispatch(ACTIONS.signIn(email, password))
+        signIn: (email, password) => dispatch(ACTIONS.signIn(email, password)),
+        addToast:(toast)=>dispatch(ACTIONS.addToast(toast))
     }
 }
 

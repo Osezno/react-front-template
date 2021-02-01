@@ -15,18 +15,17 @@ import {
     MenuItem,
     InputLabel,
     Select as MuiSelect,
-    Snackbar,
     TextField,
     Button,
     Typography,
 } from '@material-ui/core'
-//import * as ACTIONS from '../../store/actions';
-const { errors, vertical, horizontal, rol, estatus, inputStr } = catalogs
+
+const { errors, toast, rol, estatus, inputStr } = catalogs
 
 
 
 const NewUserForm = (props) => {
-    const { authUser } = props
+    const { authUser, addToast } = props
     const { uuid, token } = authUser
 
 
@@ -35,9 +34,6 @@ const NewUserForm = (props) => {
     const [error, setError] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     //snackbar
-    const [open, setOpen] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
     const [previewImg, setPreviewImg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -108,13 +104,9 @@ const NewUserForm = (props) => {
         setErrorMessage('')
     }
 
-    const handleCloseToast = () => {
-        setOpen(false);
-    };
 
     //MAIN FUNCTIONS
     const handleChange = event => {
-        console.log(formData, event, event.target.name, event.target.value)
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
@@ -130,19 +122,13 @@ const NewUserForm = (props) => {
                 ...options,
             }
         }).then((res) => {
-            setToastMessage(res.data.message)
-            if (res.data.success) {
-                // reload page
-                setToastType(classes.success)
-            }
-            else setToastType(classes.error)
-            setOpen(true)
-            setLoading(false)
+            toast['message'] = res.data.message
+            if (res.data.success) toast['success'] = true   
         }).catch(err => {
-            setToastMessage(errors.serverError)
-            setToastType(classes.error)
-            setOpen(true)
+            toast['message'] = errors.serverError
+        }).finally(()=>{
             setLoading(false)
+            addToast(toast)
         })
     }
 
@@ -253,18 +239,7 @@ const NewUserForm = (props) => {
             >
                 {loading ? inputStr.load : inputStr.update}
             </Button>
-            <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleCloseToast}
-                message={
-                    <div className={toastType}>
-                        {toastMessage}
-                    </div>
-                }
-                key={vertical + horizontal}
-            />
+            
         </form>
 
     )

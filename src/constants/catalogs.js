@@ -75,9 +75,12 @@ const estatus = {
   "5":"Eliminado"
 }
 
+const toast = { open:true, message: "", success:false }
+
 const Catalogs = {
   vertical:'bottom',
   horizontal:'center',
+  toast:toast,
   inputStr:inputs,
   pageInfo: pageInfo,
   errors:errors,

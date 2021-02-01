@@ -1,9 +1,12 @@
 
-import React, { useState, useEffect } from 'react'
+import React  from 'react'
 import ContentStyle from '../../Content.style'
 import NewUserForm from '../../../../components/Forms/NewUserForm';
 import { connect } from 'react-redux';
 import catalogs from '../../../../constants/catalogs';
+
+import * as ACTIONS from '../../../../store/actions';
+
 import {
     IconButton,
 } from '@material-ui/core'
@@ -12,7 +15,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 const useStyles = ContentStyle
 
 const NewUser = props => {
-    const { authUser, changeView } = props
+    const { authUser, changeView, addToast } = props
     const { pages } = catalogs
     const css = useStyles();
 
@@ -29,7 +32,7 @@ const NewUser = props => {
                 </IconButton>
                 <h1 className={css.title}>{pages.newUser}</h1>
             </div>
-            <NewUserForm authUser={authUser} />
+            <NewUserForm authUser={authUser} addToast={(toast) => addToast(toast)} />
         </>
 
 
@@ -44,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        addToast:(toast)=>dispatch(ACTIONS.addToast(toast))
     }
 }
 

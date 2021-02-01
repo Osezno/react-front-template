@@ -18,20 +18,17 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 //import * as ACTIONS from '../../store/actions';
-const { errors, vertical, horizontal, inputStr } = catalogs
+const { errors, toast, inputStr } = catalogs
 
 
 
 const SignInForm = (props) => {
-    const { uuid, token } = props
+    const { uuid, token,addToast } = props
     const classes = useStyles();
 
     const [error, setError] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     //snackbar
-    const [open, setOpen] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
 
 
@@ -72,9 +69,6 @@ const SignInForm = (props) => {
         setErrorMessage('')
     }
 
-    const handleCloseToast = () => {
-        setOpen(false);
-    };
 
 
 
@@ -92,19 +86,13 @@ const SignInForm = (props) => {
             password: formData.password
         }
         axios.post(api.change, data).then((res) => {
-            setToastMessage(res.data.message)
-            if (res.data.success) {
-                //redux change
-                setToastType(classes.success)
-            }
-            else setToastType(classes.error)
-            setOpen(true)
-            setLoading(false)
+            toast['message']= res.data.message
+            if (res.data.success) toast['success'] = true
         }).catch(err => {
-            setToastMessage(errors.serverError)
-            setToastType(classes.error)
-            setOpen(true)
+            toast['message'] = errors.serverError
+        }).finally(()=>{
             setLoading(false)
+            addToast(toast)
         })
     }
 
@@ -157,18 +145,7 @@ const SignInForm = (props) => {
             >
                 {loading ? inputStr.load  : inputStr.changePassword }
             </Button>
-            <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleCloseToast}
-                message={
-                    <div className={toastType}>
-                        {toastMessage}
-                    </div>
-                }
-                key={vertical + horizontal}
-            />
+           
         </form>
 
     )

@@ -1,3 +1,5 @@
+// investigar algunas paletas ya creadas
+
 const colors = {
    primary:"#cb2d3e",//rojo
    primaryLight:"#ff786d",

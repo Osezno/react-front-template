@@ -15,7 +15,7 @@ import View from './accountComponents/View';
 import SignInForm from '../../components/Forms/SignInForm';
 
 const SignIn = (props) => {
-    const { signIn} = props
+    const { signIn, addToast} = props
     const { pageInfo } = catalogs
     const classes = useStyles();
 
@@ -29,7 +29,7 @@ const SignIn = (props) => {
                 <View className={classes.cover} cover={pageInfo.cover} />
                 <div className={classes.content}>
                     <Info title={"lorem Ipsum"} highlight={"dolor amet"} message={pageInfo.welcomeMessage} />
-                    <SignInForm addAuthUser={(session) => addAuthUser(session)} />
+                    <SignInForm addAuthUser={(session) => addAuthUser(session)} addToast={(toast) => addToast(toast)} />
                     <div className={classes.linkContainer}>
                         <Text color={colors.dark} type="small">
                             ¿Olvidaste tu contraseña?&nbsp;
@@ -61,7 +61,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        signIn: (session) => dispatch(ACTIONS.signIn(session))
+        signIn: (session) => dispatch(ACTIONS.signIn(session)),
+        addToast:(toast)=>dispatch(ACTIONS.addToast(toast))
     }
 }
 

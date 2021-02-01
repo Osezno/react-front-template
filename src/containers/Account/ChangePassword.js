@@ -21,12 +21,11 @@ import * as ACTIONS from '../../store/actions';
 import Info from './accountComponents/Info';
 import View from './accountComponents/View';
 
+const { pageInfo } = catalogs
 
 const ChangePassword = (props) => {
-    const {match: { params } } = props
-    const { pageInfo } = catalogs
+    const {match: { params } , addToast} = props
     const { tmp, id } = params;
-    console.log(tmp,id)
     const classes = useStyles();
 
 
@@ -36,7 +35,7 @@ const ChangePassword = (props) => {
                 <div className={classes.content}>
 
                     <Info title={"lorem Ipsum"} highlight={"dolor amet"} message={pageInfo.welcomeMessage} /> 
-                    <ChangePasswordForm token={tmp} uuid={id} />
+                    <ChangePasswordForm token={tmp} uuid={id} addToast={(toast) => addToast(toast)} />
                     <div className={classes.linkContainer}>
                         <Link
                             variant="subtitle2"
@@ -60,13 +59,14 @@ const ChangePassword = (props) => {
 
 const mapStateToProps = state => {
     return {
-        error: state.sessionState.error
+  
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        signIn: (email, password) => dispatch(ACTIONS.signIn(email, password))
+        signIn: (email, password) => dispatch(ACTIONS.signIn(email, password)),
+        addToast:(toast)=>dispatch(ACTIONS.addToast(toast))
     }
 }
 

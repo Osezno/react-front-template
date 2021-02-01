@@ -8,4 +8,9 @@ export {
     signOut
 } from './session';
 
+export {
+    addToast,
+    removeToast,
+} from './toast';
+
 

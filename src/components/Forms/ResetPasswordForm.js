@@ -18,17 +18,14 @@ import {
 
 
 
-const { errors, vertical, horizontal, inputStr } = catalogs
+const { errors, toast, inputStr } = catalogs
 
 const ResetPasswordForm = (props) => {
-
+    const {addToast} = props
     const classes = useStyles();
     const [error, setError] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
      //Snackbar
-    const [open, setOpen] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -55,9 +52,6 @@ const ResetPasswordForm = (props) => {
         setError(false)
         setErrorMessage('')
     }
-    const handleCloseToast = () => {
-        setOpen(false);
-    };
 
     //MAIN FUNCTIONS
     const handleChange = event => {
@@ -70,25 +64,17 @@ const ResetPasswordForm = (props) => {
         //default
         event.preventDefault();
         setLoading(true)
-        //config
         let options = api.headersConfig(' ')
         let body = { email: email }
-
         axios.post(api.forgot, body, { headers: {
             ...options,
           }}).then((res) => {
-            console.log(res)
-            setToastMessage(res.data.message)
-            if (res.data.success) {
-                setToastType(classes.success)
-            }
-            else setToastType(classes.error)
-            setOpen(true)
-            setLoading(false)
+            toast['message']= res.data.message 
+            if (res.data.success) toast['success'] = true
         }).catch(err => {
-            setToastMessage(errors.serverError)
-            setToastType(classes.error)
-            setOpen(true)
+            toast['message'] = errors.serverError
+        }).finally(()=>{
+            addToast(toast)
             setLoading(false)
         })
     }
@@ -124,18 +110,7 @@ const ResetPasswordForm = (props) => {
             >
                 {inputStr.updatePassword}
            </Button>
-           <Snackbar
-                anchorOrigin={{vertical, horizontal }}
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleCloseToast}
-                message={
-                    <div className={toastType}>
-                        {toastMessage}
-                    </div>
-                }
-                key={vertical + horizontal}
-            />
+          
         </form>
 
     )

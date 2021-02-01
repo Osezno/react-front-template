@@ -21,21 +21,15 @@ import {
     Paper
 } from '@material-ui/core'
 //import * as ACTIONS from '../../store/actions';
-const { errors, vertical, horizontal, rol, estatus, inputStr } = catalogs
+const { errors, toast, rol, estatus, inputStr } = catalogs
 
 
 
 const UsersTable = (props) => {
-    const { authUser } = props
+    const { authUser, addToast } = props
     const { uuid, token } = authUser
     const css = useStyles();
-    //handle this with redux?
-    const [error, setError] = useState(true);
-    const [errorMessage, setErrorMessage] = useState('');
     //snackbar
-    const [open, setOpen] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState({});
@@ -51,11 +45,7 @@ const UsersTable = (props) => {
         setUserIndex(0)
         setOpenModal(false);
     };
-    //GENERAL FUNCTIONS
-    const handleCloseToast = () => {
-        setOpen(false);
-    };
-
+ 
     //MAIN FUNCTIONS
     // const handleChange = event => {
     //     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -70,19 +60,15 @@ const UsersTable = (props) => {
                 ...options,
             }
         }).then((res) => {
-            setToastMessage(res.data.message)
+            toast['message']= res.data.message 
             if (res.data.success) {
-                console.log(res.data.data)
                 setUsers(res.data.data)
-                setToastType(css.success)
+                toast['success'] = true
             }
-            else setToastType(css.error)
-            setOpen(true)
-            setLoading(false)
         }).catch(err => {
-            setToastMessage(errors.serverError)
-            setToastType(css.error)
-            setOpen(true)
+            toast['message'] = errors.serverError
+        }).finally(()=>{
+            addToast(toast)
             setLoading(false)
         })
     }
@@ -100,14 +86,12 @@ const UsersTable = (props) => {
     }
 
     const editar = (user, i) => {
-        console.log(i)
         setUserIndex(i)
         setEditUser(user)
         handleOpenModal()
     }
 
     const handleUserChanged = (UserChanged)=> {
-        console.log(UserChanged)
         let newUsersArray = [...users];
         newUsersArray[userIndex] = UserChanged;
         setUsers(newUsersArray);
@@ -165,18 +149,6 @@ const UsersTable = (props) => {
                     <EditUserForm editUser={editUser} authUser={authUser} handleUserChanged={handleUserChanged} />
                 </div>
             </Modal>
-            <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleCloseToast}
-                message={
-                    <div className={toastType}>
-                        {toastMessage}
-                    </div>
-                }
-                key={vertical + horizontal}
-            />
         </>
     )
 }
