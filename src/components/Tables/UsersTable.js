@@ -146,7 +146,7 @@ const UsersTable = (props) => {
                 onClose={handleCloseModal}
             >
                 <div className={css.modalWrap} >
-                    <EditUserForm editUser={editUser} authUser={authUser} handleUserChanged={handleUserChanged} />
+                    <EditUserForm  addToast={(toast)=>addToast(toast)} editUser={editUser} authUser={authUser} handleUserChanged={handleUserChanged} />
                 </div>
             </Modal>
         </>
