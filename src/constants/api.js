@@ -26,8 +26,8 @@ const sesiones = {
 }
 
 const usuarios = {
-    
-    nuevoUsuario: mainUrl + "/api/v1/nuevo-usuario",
+    onboard: mainUrl + "api/v1/onboard",
+    nuevoUsuario: mainUrl + "api/v1/nuevo-usuario",
     verUsuarios: mainUrl + "api/v1/ver-usuarios",
     verPerfil: mainUrl + "api/v1/ver-perfil",
     updateProfile: mainUrl + "api/v1/editar-perfil",

@@ -149,7 +149,7 @@ const EditUserForm = (props) => {
     return (
 
         <form onSubmit={preUpdateProfile} className={classes.form}>
-            <div className={classes.pictureWrap} style={{ backgroundImage: `url("${previewImg != "" ? previewImg : fotografia}")` }}>
+            <div className={classes.pictureWrap} style={{ backgroundImage: `url("${previewImg !== "" ? previewImg : fotografia}")` }}>
                 <IconButton
                     className={classes.belowDivIcon}
                     aria-label="more"

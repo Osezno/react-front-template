@@ -13,6 +13,20 @@ const ContentStyle = makeStyles(theme => ({
     menu:{
         backgroundColor:theme.color.secondary
     },
+    mItem:{
+        color:theme.color.lightest,
+        '& > .MuiIconButton-root':{
+            color:theme.color.lightest
+        }
+      //  backgroundColor:theme.color.secondary
+    },
+    mItemActive:{
+        color:theme.color.lightest,
+        backgroundColor:theme.color.secondaryLigth,
+        '& > .MuiIconButton-root':{
+            color:theme.color.lightest
+        }
+    },
     container: {
         width: "100vw",
         height: "100vh",

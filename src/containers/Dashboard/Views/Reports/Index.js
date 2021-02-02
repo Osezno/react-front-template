@@ -1,14 +1,14 @@
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
+//import { Switch, Route, withRouter } from 'react-router-dom';
 import ContentStyle from '../../Content.style'
 import catalogs from '../../../../constants/catalogs';
 
 const useStyles = ContentStyle
 
 const Index = props => {
-    const { authUser } = props
+    
     const { pages } = catalogs
     const css = useStyles();
 

@@ -43,6 +43,7 @@ const pages = {
   users: "Usuarios",
   newUser: "Nuevo usuario",
   reports: "Reportes",
+  onboard: "Bienvenido ",
 }
 
 const inputs = {
@@ -60,6 +61,7 @@ const inputs = {
     email:"Correo",
     status:"Estatus",
     rol:"Rol",
+    skip:"Skip onboard"
 }
 
 const rol = {

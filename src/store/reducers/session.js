@@ -1,4 +1,4 @@
-import { SET_AUTH_USER, SET_SESSION_ERROR, SET_INIT_SESSION } from '../actions/types';
+import { SET_AUTH_USER} from '../actions/types';
 import { updateObject } from "../utility";
 
 

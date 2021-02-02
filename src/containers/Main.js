@@ -12,8 +12,9 @@ import {
 import LayoutStyle from '../components/Layout/Layout.style'
 import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
-import Dashboard from './Dashboard/Dashboard'
 import * as ACTIONS from '../store/actions';
+//
+import Dashboard from './Dashboard/Index'
 //account
 import SignIn from './Account/SignIn';
 import ResetPassword from './Account/ResetPassword';
@@ -27,7 +28,7 @@ const useStyles = LayoutStyle
 
 const Main = props => {
     const { authUser, signOut } = props
-    const { uuid, token, id_estatus } = authUser
+    const { uuid, token, id_estatus, onboard, id_rol } = authUser
     const [toggle, setToggle] = useState(false);
     const css = useStyles();
     // views para diferentes roles
@@ -48,8 +49,8 @@ const Main = props => {
     }
 
     const checkEstatus = () => {
-        if (id_estatus === "2") return <Dashboard toggle={toggle} />;
-        else return accountUnavailable();
+        if (catalogs.estatus[id_estatus] !== "Activo") return  accountUnavailable();
+        else return <Dashboard toggle={toggle} onboard={onboard} id_rol={id_rol}/>;
     }
 
     return (

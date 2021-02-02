@@ -1,4 +1,4 @@
-import { SET_AUTH_USER, SET_SESSION_ERROR, SET_INIT_SESSION } from './types';
+import { SET_AUTH_USER} from './types';
 import { CLEARSTORE } from './types';
 // import Firebase from 'config/Firebase';
 
@@ -35,11 +35,22 @@ export const fetchAuthUser = () => async dispatch => {
         }
     } catch {
         console.log("error")
-        // ignore write errors
     }
 
 }
 
+export const updateUserOnLS = (session) => async dispatch => {
+     // el rol puede ser cambiado ?
+     // donde se actualizaria en cache estar revisando esto
+    try {
+        localStorage.setItem('id_estatus', session.id_estatus);
+        localStorage.setItem('onboard', session.onboard);
+        localStorage.setItem('id_rol', session.id_rol);
+    } catch {
+        console.log("error")
+    }
+    dispatch(setAuthUser(session));
+}
 
 export const signIn = (session) => async dispatch => {
     try {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStyles } from './Form.styles';
 import {  nullInObj, checkEmail, checkLength, checkNumber, checkPassword, checkEquality } from './validations';
 import catalogs from '../../constants/catalogs';
@@ -35,7 +35,6 @@ const NewUserForm = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
     //snackbar
     const [loading, setLoading] = useState(false);
-    const [previewImg, setPreviewImg] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
 

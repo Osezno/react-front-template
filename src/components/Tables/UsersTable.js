@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStyles } from './Tables.styles';
 import catalogs from '../../constants/catalogs';
 import EditUserForm from '../Forms/EditUserForm';
@@ -10,7 +10,7 @@ import {
 import Edit from '@material-ui/icons/Edit';
 
 import {
-    Snackbar,
+  
     Table,
     TableBody,
     TableCell,
@@ -21,7 +21,7 @@ import {
     Paper
 } from '@material-ui/core'
 //import * as ACTIONS from '../../store/actions';
-const { errors, toast, rol, estatus, inputStr } = catalogs
+const { errors, toast, rol, estatus } = catalogs
 
 
 
@@ -30,7 +30,7 @@ const UsersTable = (props) => {
     const { uuid, token } = authUser
     const css = useStyles();
     //snackbar
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState({});
     const [userIndex, setUserIndex] = useState(0);
@@ -54,7 +54,7 @@ const UsersTable = (props) => {
     const getUsers = () => {
         let body = { uuid: uuid }
         let options = api.headersConfig(token)
-        setLoading(true)
+        // setLoading(true)
         axios.post(api.usuarios.verUsuarios, body, {
             headers: {
                 ...options,
@@ -69,7 +69,7 @@ const UsersTable = (props) => {
             toast['message'] = errors.serverError
         }).finally(()=>{
             addToast(toast)
-            setLoading(false)
+       
         })
     }
     const renderImage = (url) => {

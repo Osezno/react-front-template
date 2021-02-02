@@ -8,6 +8,7 @@ const colors = {
    contrastDark:"#30122d",
    contrastDarker:"#30122d",
    secondary:"rgb(4, 22, 43)", //azul
+   secondaryLigth:"rgb(12 33 58)",
    tertiary:"#f9ee60",//celeste
    success:"#8ccc52",
    warning:"#f8eb46",
