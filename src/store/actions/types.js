@@ -5,3 +5,4 @@ export const CLEARSTORE = 'CLEARSTORE';
 export const SET_INIT_SESSION = 'SET_INIT_SESSION';
 export const ADD_TOAST = "ADD_TOAST";
 export const REMOVE_TOAST = "REMOVE_TOAST";
+export const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";

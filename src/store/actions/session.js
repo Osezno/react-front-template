@@ -1,6 +1,6 @@
-import { SET_AUTH_USER} from './types';
+import { SET_AUTH_USER, SET_NOTIFICATIONS } from './types';
 import { CLEARSTORE } from './types';
-// import Firebase from 'config/Firebase';
+import Firebase from '../../config/Firebase/index';
 
 //import * as ACTIONS from '../../store/actions';
 
@@ -12,6 +12,12 @@ export const setAuthUser = user => {
         payload: user
     }
 }
+export const setNotifications = notifications => {
+    return {
+        type: SET_NOTIFICATIONS,
+        payload: notifications
+    }
+}
 
 
 
@@ -21,6 +27,13 @@ export const clearStore = () => {
     }
 }
 
+export const fetchNotifications =  (uuid) => async dispatch =>{
+    Firebase.getNotifications(uuid).on('value', async snapshot => {
+        const data = snapshot.val();
+        dispatch(setNotifications(data.notificaciones));
+      
+    })
+}
 
 export const fetchAuthUser = () => async dispatch => {
     try {
@@ -40,8 +53,8 @@ export const fetchAuthUser = () => async dispatch => {
 }
 
 export const updateUserOnLS = (session) => async dispatch => {
-     // el rol puede ser cambiado ?
-     // donde se actualizaria en cache estar revisando esto
+    // el rol puede ser cambiado ?
+    // donde se actualizaria en cache estar revisando esto
     try {
         localStorage.setItem('id_estatus', session.id_estatus);
         localStorage.setItem('onboard', session.onboard);

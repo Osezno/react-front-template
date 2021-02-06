@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as ROUTES from '../constants/routes';
 import { connect } from 'react-redux';
 
@@ -27,15 +27,16 @@ import catalogs from '../constants/catalogs';
 const useStyles = LayoutStyle
 
 const Main = props => {
-    const { authUser, signOut } = props
+    const { authUser, signOut, fetchNotifications,notifications } = props
     const { uuid, token, id_estatus, onboard, id_rol } = authUser
     const [toggle, setToggle] = useState(false);
+    const [notificaciones, setNotificaciones] = useState(false);
     const css = useStyles();
     // views para diferentes roles
     const handleToggle = () => {
         setToggle(!toggle)
     }
-   
+
     const accountUnavailable = () => {
         let body = <div className={css.unavailable}>
             <div className={css.letrero}>
@@ -49,9 +50,14 @@ const Main = props => {
     }
 
     const checkEstatus = () => {
-        if (catalogs.estatus[id_estatus] !== "Activo") return  accountUnavailable();
-        else return <Dashboard toggle={toggle} onboard={onboard} id_rol={id_rol}/>;
+        if (catalogs.estatus[id_estatus] !== "Activo") return accountUnavailable();
+        else return <Dashboard toggle={toggle} onboard={onboard} id_rol={id_rol} />;
     }
+
+    useEffect(() => {
+        if(uuid) fetchNotifications(uuid)
+
+    }, [uuid])
 
     return (
 
@@ -61,7 +67,10 @@ const Main = props => {
                     toggle={toggle}
                     handleToggle={() => handleToggle()}
                     signOut={() => signOut()}
-                    authUser={authUser} />
+                    authUser={authUser}
+                    notifications={notifications}
+                     />
+                   
                 {
                     (token && uuid) ? checkEstatus()
                         :
@@ -82,13 +91,14 @@ const Main = props => {
 
 const mapStateToProps = state => {
     return {
-
+        notifications: state.sessionState.notifications,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        signOut: () => dispatch(ACTIONS.signOut())
+        signOut: () => dispatch(ACTIONS.signOut()),
+        fetchNotifications: (uuid) => dispatch(ACTIONS.fetchNotifications(uuid))
     }
 }
 

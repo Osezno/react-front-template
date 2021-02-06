@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LayoutStyle from './Layout.style'
 import Logo from './Logo'
 import { useHistory } from 'react-router-dom';
@@ -11,26 +11,30 @@ import * as ROUTES from '../../constants/routes';
 import axios from 'axios';
 import Notifications from '@material-ui/icons/Notifications';
 
-const { errors, vertical, horizontal,pages,rol } = catalogs
+const { errors, vertical, horizontal, pages, rol } = catalogs
 const useStyles = LayoutStyle
 
 const Header = props => {
     const css = useStyles();
-    const { authUser, signOut, handleToggle, toggle } = props
+    const { authUser, signOut, handleToggle, toggle, notifications } = props
     const history = useHistory();
-  
+
     const { uuid, token, id_rol } = authUser
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorNot, setAnchorNot] = React.useState(null);
     //snackbar
     const [open, setOpen] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState({});
     const [loading, setLoading] = useState(false);
-
+    const [newNotifications, setNewNotifications] = useState(false);
 
     //GENERAL FUNCTIONS  
     const handleClose = () => {
         setAnchorEl(null);
+    };
+    const handleCloseNot = () => {
+        setAnchorNot(null);
     };
     const handleCloseToast = () => {
         setOpen(false);
@@ -41,13 +45,13 @@ const Header = props => {
     };
 
     const handleNotifications = (event) => {
-
+        setAnchorNot(event.currentTarget);
+        // update notifications to  leidas true
     }
 
     const handleLogout = () => {
         handleClose()
         setLoading(true)
-
 
         let options = api.headersConfig(token)
         let body = { uuid: uuid }
@@ -57,20 +61,14 @@ const Header = props => {
                 ...options,
             }
         }).then((res) => {
-
             setToastMessage(res.data.message)
-            setOpen(true)
             if (res.data.success) {
                 signOut()
                 setToastType(css.success)
             }
-            else setToastType(css.error)
-            setLoading(false)
         }).catch(err => {
-            // no esta funcionando
-            console.log(err)
             setToastMessage(errors.serverError)
-            setToastType(css.error)
+        }).finally(() => {
             setOpen(true)
             setLoading(false)
         })
@@ -80,6 +78,17 @@ const Header = props => {
         history.push(route);
         window.scrollTo(0, 0);
     }
+
+    useEffect(() => {
+        if (notifications.length) {
+            let noLeidas = []
+            notifications.forEach((n) => {
+                if (!n.leidas) noLeidas.push(n)
+            })
+            if (noLeidas.length) setNewNotifications(true)
+        }
+    }, [notifications])
+
 
 
 
@@ -102,7 +111,7 @@ const Header = props => {
             aria-haspopup="true"
             onClick={handleNotifications}
         >
-            <Notifications />
+            <Notifications className={true ? css.alert : null} />
         </IconButton>
         <IconButton
             aria-label="vér mas"
@@ -114,17 +123,26 @@ const Header = props => {
         </IconButton>
         <Menu
             id="simple-menu"
+            anchorEl={anchorNot}
+            keepMounted
+            open={Boolean(anchorNot)}
+            onClose={handleCloseNot}
+        >
+            {notifications.length ? notifications.map((n, i) => <MenuItem key={i} className={css.mItem} onClick={() => navigateTo(n.url)}>{n.mensaje}</MenuItem>) : "No hay notificaciones"}
+        </Menu>
+        <Menu
+            id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
             <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.ACCOUNT)}>{pages.account}</MenuItem>
-            <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.DASHBOARD)}>{pages.dashboard}</MenuItem>
-            <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
-            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem  className={css.mItem} onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
-            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem   className={css.mItem} onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
-            <MenuItem  className={css.mItem} onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.DASHBOARD)}>{pages.dashboard}</MenuItem>
+            <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={css.mItem} onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
+            <MenuItem className={css.mItem} onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     </div>;
 

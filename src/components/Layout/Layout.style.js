@@ -47,6 +47,9 @@ const LayoutStyle = makeStyles(theme => ({
         justifyContent: 'justify-content: left;',
         borderBottom: `${theme.color.contrastDark} 1px solid`,
     },
+    alert:{
+        color:theme.color.primary,
+    },
     footer: {
         ...theme.grids.octaGrid,
         backgroundColor: theme.color.primary,

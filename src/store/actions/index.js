@@ -6,6 +6,7 @@ export {
     signIn,
     updateUserOnLS,
     signOut,
+    fetchNotifications,
 } from './session';
 
 export {
