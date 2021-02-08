@@ -10,13 +10,14 @@ import api from '../../constants/api';
 import * as ROUTES from '../../constants/routes';
 import axios from 'axios';
 import Notifications from '@material-ui/icons/Notifications';
+import Firebase from '../../config/Firebase/index';
 
 const { errors, vertical, horizontal, pages, rol } = catalogs
 const useStyles = LayoutStyle
 
 const Header = props => {
     const css = useStyles();
-    const { authUser, signOut, handleToggle, toggle, notifications } = props
+    const { authUser, signOut, handleToggle, toggle, notifications, seenNotifications } = props
     const history = useHistory();
 
     const { uuid, token, id_rol } = authUser
@@ -46,7 +47,10 @@ const Header = props => {
 
     const handleNotifications = (event) => {
         setAnchorNot(event.currentTarget);
-        // update notifications to  leidas true
+        let seenNotifications =[...notifications]
+        Promise.all(seenNotifications.map((n)=> n.visto = true)).then(()=>{
+            Firebase.seenNotifications(uuid,seenNotifications)
+        })
     }
 
     const handleLogout = () => {
@@ -83,7 +87,7 @@ const Header = props => {
         if (notifications.length) {
             let noLeidas = []
             notifications.forEach((n) => {
-                if (!n.leidas) noLeidas.push(n)
+                if (!n.visto) noLeidas.push(n)
             })
             if (noLeidas.length) setNewNotifications(true)
         }
@@ -111,7 +115,7 @@ const Header = props => {
             aria-haspopup="true"
             onClick={handleNotifications}
         >
-            <Notifications className={true ? css.alert : null} />
+            <Notifications className={newNotifications ? css.alert : null} />
         </IconButton>
         <IconButton
             aria-label="vér mas"

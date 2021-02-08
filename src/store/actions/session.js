@@ -30,10 +30,13 @@ export const clearStore = () => {
 export const fetchNotifications =  (uuid) => async dispatch =>{
     Firebase.getNotifications(uuid).on('value', async snapshot => {
         const data = snapshot.val();
+        console.log(data.notificaciones)
         dispatch(setNotifications(data.notificaciones));
       
     })
 }
+
+
 
 export const fetchAuthUser = () => async dispatch => {
     try {

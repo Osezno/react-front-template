@@ -30,7 +30,6 @@ const Main = props => {
     const { authUser, signOut, fetchNotifications,notifications } = props
     const { uuid, token, id_estatus, onboard, id_rol } = authUser
     const [toggle, setToggle] = useState(false);
-    const [notificaciones, setNotificaciones] = useState(false);
     const css = useStyles();
     // views para diferentes roles
     const handleToggle = () => {
@@ -56,7 +55,6 @@ const Main = props => {
 
     useEffect(() => {
         if(uuid) fetchNotifications(uuid)
-
     }, [uuid])
 
     return (
@@ -69,6 +67,7 @@ const Main = props => {
                     signOut={() => signOut()}
                     authUser={authUser}
                     notifications={notifications}
+                   
                      />
                    
                 {
@@ -98,7 +97,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         signOut: () => dispatch(ACTIONS.signOut()),
-        fetchNotifications: (uuid) => dispatch(ACTIONS.fetchNotifications(uuid))
+        fetchNotifications: (uuid) => dispatch(ACTIONS.fetchNotifications(uuid)),
     }
 }
 
