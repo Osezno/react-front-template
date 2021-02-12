@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useStyles } from './Form.styles';
 import { checkEmail } from './validations';
-import catalogs from '../../constants/catalogs';
-import api from '../../constants/api';
+import catalogs from 'constants/catalogs';
+import api from 'constants/api';
 import axios from 'axios';
 
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useStyles } from './Tables.styles';
-import catalogs from '../../constants/catalogs';
-import EditUserForm from '../Forms/EditUserForm';
-import api from '../../constants/api';
+import catalogs from 'constants/catalogs';
+import EditUserForm from 'components/Forms/EditUserForm';
+import api from 'constants/api';
 import axios from 'axios';
 import {
     IconButton,

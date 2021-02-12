@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStyles } from './Form.styles';
 import { resizeImage, nullInObj, checkEmail, checkLength, checkNumber } from './validations';
-import catalogs from '../../constants/catalogs';
-import api from '../../constants/api';
+import catalogs from 'constants/catalogs';
+import api from 'constants/api';
 import axios from 'axios';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 

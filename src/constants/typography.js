@@ -4,14 +4,16 @@ const typography = {
         fontWeight: 400,
         fontSize: 30,
         lineHeight: '30px',
-        letterSpacing: .2
+        letterSpacing: .2,
+        margin:8,
     },
     subtitle:{
         fontFamily: 'Roboto',
         fontWeight: 300,
         fontSize: 20,
         lineHeight: '20px',
-        letterSpacing: .2
+        letterSpacing: .2,
+        margin:8,
     },
     paragraph: {
         fontFamily: 'Lora',

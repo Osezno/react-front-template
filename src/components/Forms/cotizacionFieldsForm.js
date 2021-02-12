@@ -24,7 +24,7 @@ const { errors, toast, rol, estatus, inputStr } = catalogs
 
 
 
-const NewUserForm = (props) => {
+const cotizacionFieldsForm = (props) => {
     const { authUser, addToast } = props
     const { uuid, token } = authUser
 
@@ -248,4 +248,4 @@ const NewUserForm = (props) => {
 
 
 
-export default NewUserForm;
+export default cotizacionFieldsForm;

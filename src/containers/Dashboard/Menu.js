@@ -32,6 +32,7 @@ const Menu = props => {
             <MenuItem className={(pathname === ROUTES.PROFILE) ? css.mItemActive : css.mItem} onClick={() => navigateTo(ROUTES.PROFILE)}>{pages.profile}</MenuItem>
             {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={(pathname === ROUTES.USERS) ? css.mItemActive : css.mItem} onClick={() => navigateTo(ROUTES.USERS)}>{pages.users}</MenuItem> : null}
             {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={(pathname === ROUTES.REPORTS) ? css.mItemActive : css.mItem} onClick={() => navigateTo(ROUTES.REPORTS)}>{pages.reports}</MenuItem> : null}
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={(pathname === ROUTES.COTIZACION) ? css.mItemActive : css.mItem} onClick={() => navigateTo(ROUTES.COTIZACION)}>{pages.cotizacion}</MenuItem> : null}
         </div>
 
     );

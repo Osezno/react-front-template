@@ -3,11 +3,11 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useStyles } from './Account.styles';
-import catalogs from '../../constants/catalogs';
-import * as ROUTES from '../../constants/routes';
-import colors from '../../constants/colors';
-import Text from '../../components/Text/Text'
-import ResetPasswordForm from '../../components/Forms/ResetPasswordForm';
+import catalogs from 'constants/catalogs';
+import * as ROUTES from 'constants/routes';
+import colors from 'constants/colors';
+import Text from 'components/Text/Text'
+import ResetPasswordForm from 'components/Forms/ResetPasswordForm';
 
 import {
     Card,
@@ -16,7 +16,7 @@ import {
 
 
 
-import * as ACTIONS from '../../store/actions';
+import * as ACTIONS from 'store/actions';
 
 import Info from './accountComponents/Info';
 import View from './accountComponents/View';

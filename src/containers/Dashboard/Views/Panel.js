@@ -1,7 +1,7 @@
 import React  from 'react'
 import {  withRouter } from 'react-router-dom';
 import ContentStyle from '../Content.style'
-import catalogs from '../../../constants/catalogs';
+import catalogs from 'constants/catalogs';
 
 
 

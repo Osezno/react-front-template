@@ -3,16 +3,16 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useStyles } from './Account.styles';
-import catalogs from '../../constants/catalogs';
-import * as ROUTES from '../../constants/routes';
-import colors from '../../constants/colors';
-import Text from '../../components/Text/Text'
-import * as ACTIONS from '../../store/actions';
+import catalogs from 'constants/catalogs';
+import * as ROUTES from 'constants/routes';
+import colors from 'constants/colors';
+import Text from 'components/Text/Text'
+import * as ACTIONS from 'store/actions';
 import { Card, Link } from '@material-ui/core'
 //componentes
 import Info from './accountComponents/Info';
 import View from './accountComponents/View';
-import SignInForm from '../../components/Forms/SignInForm';
+import SignInForm from 'components/Forms/SignInForm';
 
 const SignIn = (props) => {
     const { signIn, addToast} = props

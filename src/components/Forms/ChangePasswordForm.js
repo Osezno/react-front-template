@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useStyles } from './Form.styles';
-import { checkEmail, checkPassword, checkEquality } from './validations';
-import catalogs from '../../constants/catalogs';
-import api from '../../constants/api';
+import { checkPassword, checkEquality } from './validations';
+import catalogs from 'constants/catalogs';
+import api from 'constants/api';
 import axios from 'axios';
 
 import {
-    Snackbar,
+   
     TextField,
     Button,
     InputAdornment,

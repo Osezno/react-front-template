@@ -1,18 +1,13 @@
 
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
 import ContentStyle from '../../Content.style'
-import api from '../../../../constants/api';
+import api from 'constants/api';
 import axios from 'axios';
-import catalogs from '../../../../constants/catalogs';
-import * as ACTIONS from '../../../../store/actions';
-
+import catalogs from 'constants/catalogs';
+import * as ACTIONS from 'store/actions';
 import {
-    IconButton,
-    TextField,
-    Button,
-    Typography,
+    Button
 } from '@material-ui/core'
 
 const useStyles = ContentStyle

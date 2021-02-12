@@ -44,6 +44,7 @@ const pages = {
   newUser: "Nuevo usuario",
   reports: "Reportes",
   onboard: "Bienvenido ",
+  cotizacion: "Crea tu solicitud de servicio"
 }
 
 const inputs = {
@@ -60,6 +61,8 @@ const inputs = {
     tel:"Telefóno",
     email:"Correo",
     status:"Estatus",
+    type:"tipo",
+    description:"Descripción",
     rol:"Rol",
     skip:"Skip onboard"
 }

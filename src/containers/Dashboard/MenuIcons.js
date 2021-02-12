@@ -56,6 +56,11 @@ const MenuIcons = props => {
                     <Assessment />
                 </IconButton>
             </MenuItem> : null}
+            {(rol[id_rol] === "Admin" || rol[id_rol] === "Manager") ? <MenuItem className={(pathname === ROUTES.COTIZACION) ? css.mItemActive : css.mItem} onClick={() => navigateTo(ROUTES.COTIZACION)}>
+                <IconButton>
+                    <Assessment />
+                </IconButton>
+            </MenuItem> : null}
         </div>
 
     );

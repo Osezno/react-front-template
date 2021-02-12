@@ -24,7 +24,7 @@ const { errors, toast, rol, estatus, inputStr } = catalogs
 
 
 
-const NewUserForm = (props) => {
+const CotizacionForm = (props) => {
     const { authUser, addToast } = props
     const { uuid, token } = authUser
 
@@ -155,56 +155,18 @@ const NewUserForm = (props) => {
             <TextField
                 className={classes.inputs}
                 type="text"
-                label={inputStr.tel}
+                label={inputStr.description}
                 name="telefono"
                 value={telefono || ''}
                 onChange={handleChange}
             />
-            <TextField
-                className={classes.inputs}
-                label={inputStr.email}
-                type="email"
-                size="small"
-                name="email"
-                value={email || ''}
-                onChange={handleChange}
-                focus="true"
-            />
-            <TextField
-                className={classes.inputs}
-                type={showPassword ? 'text' : 'password'}
-                label={inputStr.password}
-                name="password"
-                value={password || ''}
-                onChange={handleChange}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="Mostrar/Ocultar contraseña"
-                                onClick={() => { handleClickShowPassword() }}
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    )
-                }}
-            />
-            <TextField
-                className={classes.inputs}
-                type={showPassword ? 'text' : 'password'}
-                label={inputStr.confirmPassword}
-                name="password2"
-                value={password2 || ''}
-                onChange={handleChange}
-
-            />
+           
             <FormControl>
                 <InputLabel id="rol">{inputStr.rol}</InputLabel>
                 <MuiSelect
                     name="id_rol"
                     labelId="rol"
-                    label={inputStr.rol}
+                    label={inputStr.type}
                     value={id_rol}
                     onChange={handleChange}
                 >
@@ -213,20 +175,7 @@ const NewUserForm = (props) => {
                     }
                 </MuiSelect>
             </FormControl>
-            <FormControl >
-                <InputLabel id="estatus">{inputStr.status}</InputLabel>
-                <MuiSelect
-                    name="id_estatus"
-                    labelId="estatus"
-                    label={inputStr.status}
-                    value={id_estatus}
-                    onChange={handleChange}
-                >
-                    {Object.keys(estatus).map(key =>
-                        <MenuItem key={key} value={key}>{estatus[key]}</MenuItem>)
-                    }
-                </MuiSelect>
-            </FormControl>
+           
             {error && <Typography variant="subtitle2" color="error">{errorMessage}</Typography>}
             <Button
                 // className={classes.inputs}
@@ -248,4 +197,4 @@ const NewUserForm = (props) => {
 
 
 
-export default NewUserForm;
+export default CotizacionForm;

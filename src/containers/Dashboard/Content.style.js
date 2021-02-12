@@ -45,6 +45,10 @@ const ContentStyle = makeStyles(theme => ({
         color: theme.color.secoundary,
         ...theme.typography.title
     },
+    subtitle:{
+        color: theme.color.primary,
+        ...theme.typography.subtitle
+    },
     dashboard:{
         ...theme.grids.dashboardGrid
     },

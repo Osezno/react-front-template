@@ -1,9 +1,9 @@
 import React from 'react';
 import LayoutStyle from './Layout.style'
 
-import colors from '../../constants/colors';
-import catalogs from '../../constants/catalogs';
-import Text from '../../components/Text/Text'
+import colors from 'constants/colors';
+import catalogs from 'constants/catalogs';
+import Text from 'components/Text/Text'
 
 const useStyles = LayoutStyle
 

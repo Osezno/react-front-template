@@ -1,12 +1,10 @@
 
-import React  from 'react'
-import ContentStyle from '../../Content.style'
-import NewUserForm from 'components/Forms/NewUserForm';
+import React from 'react'
 import { connect } from 'react-redux';
+//import { Switch, Route, withRouter } from 'react-router-dom';
+import ContentStyle from '../../Content.style'
 import catalogs from 'constants/catalogs';
-
-import * as ACTIONS from 'store/actions';
-
+import CotizacionForm from 'components/Forms/CotizacionForm';
 import {
     IconButton,
 } from '@material-ui/core'
@@ -14,11 +12,10 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 
 const useStyles = ContentStyle
 
-const NewUser = props => {
-    const { authUser, changeView, addToast } = props
+const Index = props => {
+    const { authUser ,changeView} = props
     const { pages } = catalogs
     const css = useStyles();
-
 
 
     return (
@@ -30,26 +27,32 @@ const NewUser = props => {
                 >
                     <ArrowBack />
                 </IconButton>
-                <h1 className={css.title}>{pages.newUser}</h1>
+                <h1 className={css.title}>{pages.cotizacion}</h1>
             </div>
-            <NewUserForm authUser={authUser} addToast={(toast) => addToast(toast)} />
+
+            <h2 className={css.subtitle}> Describe tu solicitud</h2>
+            <CotizacionForm authUser={authUser} />
+            {/* steppers ¿hacerla por pasos? */}
+
         </>
 
 
 
     );
 }
+
 const mapStateToProps = state => {
     return {
         authUser: state.sessionState.authUser,
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToast:(toast)=>dispatch(ACTIONS.addToast(toast))
+
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewUser);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
 

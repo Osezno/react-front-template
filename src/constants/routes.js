@@ -17,3 +17,5 @@ export const REPORTS = '/reportes';
 //Usuarios
 export const NEW_USER = '/new-user';
 export const USERS = '/users';
+//cotizacion
+export const COTIZACION = '/cotizacion';

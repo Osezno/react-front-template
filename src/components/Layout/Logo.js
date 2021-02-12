@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 import LayoutStyle from './Layout.style';
-import catalogs from '../../constants/catalogs';
+import catalogs from 'constants/catalogs';
 const useStyles = LayoutStyle
 
 

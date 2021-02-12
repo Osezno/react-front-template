@@ -5,12 +5,12 @@ import { useHistory } from 'react-router-dom';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { IconButton, Menu, MenuItem, Snackbar } from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import catalogs from '../../constants/catalogs';
-import api from '../../constants/api';
-import * as ROUTES from '../../constants/routes';
+import catalogs from 'constants/catalogs';
+import api from 'constants/api';
+import * as ROUTES from 'constants/routes';
 import axios from 'axios';
 import Notifications from '@material-ui/icons/Notifications';
-import Firebase from '../../config/Firebase/index';
+import Firebase from 'config/Firebase/index';
 
 const { errors, vertical, horizontal, pages, rol } = catalogs
 const useStyles = LayoutStyle

@@ -2,13 +2,13 @@
 import React from 'react'
 import ContentStyle from '../../Content.style'
 import { connect } from 'react-redux';
-import catalogs from '../../../../constants/catalogs';
+import catalogs from 'constants/catalogs';
 import {
     IconButton,
 } from '@material-ui/core'
 import PersonAdd from '@material-ui/icons/PersonAdd';
-import UsersTable from '../../../../components/Tables/UsersTable';
-import * as ACTIONS from '../../../../store/actions';
+import UsersTable from 'components/Tables/UsersTable';
+import * as ACTIONS from 'store/actions';
 const {rol} = catalogs
 const useStyles = ContentStyle
 

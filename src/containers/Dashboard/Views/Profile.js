@@ -1,10 +1,10 @@
 
 import React from 'react'
 import ContentStyle from '../Content.style'
-import EditProfileForm from '../../../components/Forms/EditProfileForm';
+import EditProfileForm from 'components/Forms/EditProfileForm';
 import { connect } from 'react-redux';
 
-import * as ACTIONS from '../../../store/actions';
+import * as ACTIONS from 'store/actions';
 
 const useStyles = ContentStyle
 

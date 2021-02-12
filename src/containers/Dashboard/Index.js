@@ -17,12 +17,12 @@ import Account from './Views/Account'
 import Users from './Views/Users/Index'
 import Reports from './Views/Reports/Index'
 import Onboard from './Views/Onboard/Index'
+import Cotizacion from './Views/Cotizacion/Index'
 
 const useStyles = ContentStyle
 
 const Index = props => {
   const { toggle, onboard, id_rol } = props
-  console.log("onboard", onboard ,onboard !== "false")
   const css = useStyles();
   let dashboard = [css.container, css.dashboard].join(' ')
   let dashboardClosed = [css.container, css.dashboard2].join(' ')
@@ -40,6 +40,7 @@ const Index = props => {
             <Route exact path={ROUTES.ACCOUNT} render={(props) => <Account />} />
             <Route exact path={ROUTES.USERS} render={(props) => <Users />} />
             <Route exact path={ROUTES.REPORTS} render={(props) => <Reports />} />
+            <Route exact path={ROUTES.COTIZACION} render={(props) => <Cotizacion />} />
             <Redirect to={ROUTES.DASHBOARD} />
           </Switch> :
           <Onboard />

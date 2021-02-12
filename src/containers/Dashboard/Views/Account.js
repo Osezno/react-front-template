@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import ContentStyle from '../Content.style'
 
 const useStyles = ContentStyle
